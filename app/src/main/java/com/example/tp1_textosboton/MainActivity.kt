@@ -2,36 +2,25 @@ package com.example.tp1_textosboton
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import com.example.tp1_textosboton.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var datosIngresados: TextView
-    private lateinit var nombre: EditText
-    private lateinit var apellido: EditText
-    private lateinit var boton: Button
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        setupVista()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         cuandoSePresionaBoton()
     }
 
-    private fun setupVista(){
-        datosIngresados = findViewById(R.id.datosIngresados)
-        nombre = findViewById(R.id.nombre)
-        apellido = findViewById(R.id.apellido)
-        boton = findViewById(R.id.boton)
-    }
-
     private fun mostrarDatosIngresados() {
-        datosIngresados.text = nombre.text.toString() + " " + apellido.text.toString()
+        binding.datosIngresados.text =
+            binding.nombre.text.toString() + " " + binding.apellido.text.toString()
     }
 
     private fun cuandoSePresionaBoton() =
-        boton.setOnClickListener { mostrarDatosIngresados() }
+        binding.boton.setOnClickListener { mostrarDatosIngresados() }
 }
