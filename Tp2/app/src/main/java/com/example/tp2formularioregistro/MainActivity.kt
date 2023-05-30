@@ -31,28 +31,31 @@ class MainActivity : AppCompatActivity() {
 
     private fun validarNombre() {
         if (binding.nombre.text.toString().isEmpty()) {
-            Toast.makeText(this, getString(R.string.complete_su_nombre), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.mensaje_nombre_incompleto), Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun valdidarEdad() {
         if (binding.edad.text.toString().isEmpty()) {
-            Toast.makeText(this, getString(R.string.complete_su_edad), Toast.LENGTH_SHORT).show()
+            generarMensaje(getString(R.string.menasaje_edad_incompleto))
         } else if(binding.edad.text.toString().toInt() < 0 || binding.edad.text.toString().toInt() > 120) {
-            Toast.makeText(this, getString(R.string.coloque_una_edad_valida), Toast.LENGTH_SHORT).show()
+            generarMensaje(getString(R.string.mensaje_edad_invalida))
         }
     }
 
     private fun valdidarSexo() {
         if (binding.sexo.checkedRadioButtonId == -1) {
-            Toast.makeText(this, getString(R.string.elija_su_sexo), Toast.LENGTH_SHORT).show()
+            generarMensaje(getString(R.string.mensaje_sexo_incompleto))
         }
     }
 
     private fun validarTerminos() {
         if(!binding.terminos.isChecked) {
-            Toast.makeText(this, getString(R.string.debe_aceptar_terminos_y_condiciones), Toast.LENGTH_SHORT).show()
+            generarMensaje(getString(R.string.debe_aceptar_terminos_y_condiciones))
         }
     }
 
+    private fun generarMensaje(mensaje: String) {
+        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+    }
 }
