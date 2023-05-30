@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Tp2FormularioRegistro</string>
+    <string name="ingrese_sus_nombre">Ingrese sus Nombre</string>
+    <string name="ingrese_edad">Ingrese su edad</string>
+    <string name="masculino">Masculino</string>
+    <string name="femenino">Femenino</string>
+    <string name="otro">Otro</string>
+</resources>
