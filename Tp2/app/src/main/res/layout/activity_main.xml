@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="@id/titulo" />
 
     <RadioGroup
-        android:id="@+id/sexo"
+        android:id="@+id/genero"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -57,16 +57,19 @@
         app:layout_constraintEnd_toEndOf="@id/titulo" >
 
         <RadioButton
+            android:id="@+id/masculino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/masculino"/>
 
         <RadioButton
+            android:id="@+id/femenino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/femenino"/>
 
         <RadioButton
+            android:id="@+id/otro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/otro"/>
@@ -78,7 +81,7 @@
         android:layout_height="wrap_content"
         android:text="@string/aceptar_terminos"
         android:layout_marginTop="100dp"
-        app:layout_constraintTop_toBottomOf="@id/sexo"
+        app:layout_constraintTop_toBottomOf="@id/genero"
         app:layout_constraintStart_toStartOf="@id/titulo"
         app:layout_constraintEnd_toEndOf="@id/titulo" />
 

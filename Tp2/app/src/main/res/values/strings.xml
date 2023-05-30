@@ -5,7 +5,7 @@
     <string name="masculino">Masculino</string>
     <string name="femenino">Femenino</string>
     <string name="otro">Otro</string>
-    <string name="mensaje_sexo_incompleto">Elija su sexo</string>
+    <string name="mensaje_genero_incompleto">Elija su genero</string>
     <string name="debe_aceptar_terminos_y_condiciones">Debe aceptar terminos y condiciones</string>
     <string name="mensaje_edad_invalida">Coloque una edad valida</string>
     <string name="menasaje_edad_incompleto">Complete su edad</string>
