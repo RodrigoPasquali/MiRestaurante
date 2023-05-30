@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tp2FormularioRegistro"
         tools:targetApi="31">
-        <activity android:name=".ui.ResultadoRegistro"/>
+        <activity android:name=".ui.ResultadoRegistroActivity"/>
         <activity
             android:name=".ui.FormularioActivity"
             android:exported="true">

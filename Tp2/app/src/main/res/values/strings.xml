@@ -13,4 +13,5 @@
     <string name="formulario_de_registro">Formulario de Registro</string>
     <string name="aceptar_terminos">Aceptar terminos</string>
     <string name="enviar">ENVIAR</string>
+    <string name="registro_exitoso">Registro Exitoso!</string>
 </resources>

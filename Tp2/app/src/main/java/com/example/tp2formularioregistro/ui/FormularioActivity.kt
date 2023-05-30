@@ -8,6 +8,7 @@ import com.example.tp2formularioregistro.R
 import com.example.tp2formularioregistro.databinding.ActivityFormularioBinding
 import com.example.tp2formularioregistro.modelo.FormularioDeRegistro
 import com.example.tp2formularioregistro.modelo.Genero
+import java.io.Serializable
 
 //Crear un viewmodel para pasar la logica
 //test
@@ -39,8 +40,9 @@ class FormularioActivity : AppCompatActivity() {
 
     private fun enviarFormulario(formulario: FormularioDeRegistro) {
         val bundle = Bundle()
-        bundle.putSerializable("formulario", formulario)
-        val intent = Intent(this, ResultadoRegistro::class.java)
+        bundle.putSerializable("formulario", formulario as Serializable)
+        bundle.putString("hola", "Hola")
+        val intent = Intent(this, ResultadoRegistroActivity::class.java)
         intent.putExtras(bundle)
         startActivity(intent)
     }
