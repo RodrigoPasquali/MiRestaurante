@@ -24,8 +24,8 @@ class MainActivity : AppCompatActivity() {
     }
     private fun validaciones() {
         validarNombre()
-        valdidarEdad()
-        valdidarSexo()
+        validarEdad()
+        validarSexo()
         validarTerminos()
     }
 
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun valdidarEdad() {
+    private fun validarEdad() {
         if (binding.edad.text.toString().isEmpty()) {
             generarMensaje(getString(R.string.menasaje_edad_incompleto))
         } else if(binding.edad.text.toString().toInt() < 0 || binding.edad.text.toString().toInt() > 120) {
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun valdidarSexo() {
+    private fun validarSexo() {
         if (binding.sexo.checkedRadioButtonId == -1) {
             generarMensaje(getString(R.string.mensaje_sexo_incompleto))
         }
