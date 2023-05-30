@@ -1,8 +1,10 @@
-package com.example.tp2formularioregistro
+package com.example.tp2formularioregistro.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.tp2formularioregistro.R
 import com.example.tp2formularioregistro.databinding.ActivityFormularioBinding
 import com.example.tp2formularioregistro.modelo.FormularioDeRegistro
 import com.example.tp2formularioregistro.modelo.Genero
@@ -16,7 +18,6 @@ class FormularioActivity : AppCompatActivity() {
     private var edad: Int = 0
     private lateinit var genero: Genero
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFormularioBinding.inflate(layoutInflater)
@@ -29,10 +30,19 @@ class FormularioActivity : AppCompatActivity() {
     private fun enviar() {
         binding.botonEnviar.setOnClickListener {
             if(datosValidos()) {
-                val formulario = generarFormulario()
                 generarMensaje("Formulario cargado con exito!!")
+
+                enviarFormulario(generarFormulario())
             }
         }
+    }
+
+    private fun enviarFormulario(formulario: FormularioDeRegistro) {
+        val bundle = Bundle()
+        bundle.putSerializable("formulario", formulario)
+        val intent = Intent(this, ResultadoRegistro::class.java)
+        intent.putExtras(bundle)
+        startActivity(intent)
     }
 
     private fun datosValidos(): Boolean =
