@@ -3,10 +3,15 @@ package com.example.tp2formularioregistro
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.example.tp2formularioregistro.databinding.ActivityMainBinding
+import com.example.tp2formularioregistro.databinding.ActivityFormularioBinding
+import com.example.tp2formularioregistro.modelo.FormularioDeRegistro
+import com.example.tp2formularioregistro.modelo.Genero
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+//Crear un viewmodel para pasar la logica
+//test
+//no validar boton hasta que se completen todos los campos
+class FormularioActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityFormularioBinding
     private lateinit var nombre: String
     private var edad: Int = 0
     private lateinit var genero: Genero
@@ -14,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityFormularioBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
