@@ -26,6 +26,8 @@
         android:layout_height="wrap_content"
         android:hint="@string/ingrese_sus_nombre"
         android:layout_marginTop="20dp"
+        android:background="@drawable/caja_de_textos"
+        android:padding="8dp"
         android:drawablePadding="5dp"
         android:drawableStart="@drawable/baseline_person_24"
         android:inputType="textPersonName"
@@ -39,6 +41,8 @@
         android:layout_height="wrap_content"
         android:hint="@string/ingrese_edad"
         android:layout_marginTop="20dp"
+        android:background="@drawable/caja_de_textos"
+        android:padding="8dp"
         android:drawableStart="@drawable/baseline_calendar_24"
         android:drawablePadding="5dp"
         android:inputType="date"
@@ -52,27 +56,44 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:background="@drawable/caja_de_textos"
+        android:padding="15dp"
         app:layout_constraintTop_toBottomOf="@id/edad"
         app:layout_constraintStart_toStartOf="@id/titulo"
         app:layout_constraintEnd_toEndOf="@id/titulo" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/genero"
+            android:layout_marginBottom="8dp"/>
 
         <RadioButton
             android:id="@+id/masculino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/masculino"/>
+            android:theme="@style/AppTheme"
+            android:textColor="@color/black"
+            android:text="@string/masculino"
+            android:layout_marginBottom="8dp"/>
 
         <RadioButton
             android:id="@+id/femenino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/femenino"/>
+            android:theme="@style/AppTheme"
+            android:textColor="@color/black"
+            android:text="@string/femenino"
+            android:layout_marginBottom="8dp"/>
 
         <RadioButton
             android:id="@+id/otro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/otro"/>
+            android:theme="@style/AppTheme"
+            android:textColor="@color/black"
+            android:text="@string/otro"
+            android:layout_marginBottom="8dp"/>
     </RadioGroup>
 
     <CheckBox
@@ -80,7 +101,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/aceptar_terminos"
-        android:layout_marginTop="100dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="120dp"
+        android:theme="@style/AppTheme"
         app:layout_constraintTop_toBottomOf="@id/genero"
         app:layout_constraintStart_toStartOf="@id/titulo"
         app:layout_constraintEnd_toEndOf="@id/titulo" />

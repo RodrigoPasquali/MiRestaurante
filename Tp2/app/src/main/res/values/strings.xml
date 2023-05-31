@@ -14,4 +14,5 @@
     <string name="aceptar_terminos">Aceptar terminos</string>
     <string name="enviar">ENVIAR</string>
     <string name="registro_exitoso">Registro Exitoso!</string>
+    <string name="genero">Genero:</string>
 </resources>

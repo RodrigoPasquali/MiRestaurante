@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Base application theme. -->
     <style name="Base.Theme.Tp2FormularioRegistro" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
@@ -6,4 +6,25 @@
     </style>
 
     <style name="Theme.Tp2FormularioRegistro" parent="Base.Theme.Tp2FormularioRegistro" />
+
+    <style name="RadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="buttonTint">@color/orange</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="radioButtonStyle">@style/MyRadioButtonStyle</item>
+        <item name="android:radioButtonStyle">@style/MyRadioButtonStyle</item>
+        <item name="checkboxStyle">@style/MyCheckBoxStyle</item>
+        <item name="android:checkboxStyle">@style/MyCheckBoxStyle</item>
+    </style>
+
+    <style name="MyCheckBoxStyle" parent="Base.Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:textColor">@drawable/radio_button</item>
+        <item name="buttonTint">@drawable/radio_button</item>
+    </style>
+
+    <style name="MyRadioButtonStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:textColor">@drawable/radio_button</item>
+        <item name="buttonTint">@drawable/radio_button</item>
+    </style>
 </resources>
