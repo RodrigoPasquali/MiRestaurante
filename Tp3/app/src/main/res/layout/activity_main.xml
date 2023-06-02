@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pokedex"
+        android:text="@string/pokedex"
         android:textSize="50dp"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +24,6 @@
         android:layout_marginTop="10dp"
         tools:listitem="@layout/item"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintTop_toBottomOf="@id/name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
