@@ -26,14 +26,14 @@ class MainActivity : AppCompatActivity() {
     }
     private fun loadPokemonData(): List<Pokemon> =
         listOf(
-            Pokemon("Bulbasaur", "Planta", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"),
-            Pokemon("Ivysaur", "Planta", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"),
-            Pokemon("Venusaur", "Planta", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"),
-            Pokemon("Charmander", "Fuego", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"),
-            Pokemon("Charmeleon", "Fuego", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"),
-            Pokemon("Charizard", "Fuego", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"),
-            Pokemon("Squirtle", "Agua", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"),
-            Pokemon("Wartortle", "Agua", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"),
-            Pokemon("Blastoise", "Agua", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")
+            Pokemon("Bulbasaur", "Planta", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/[i].png"),
+            Pokemon("Ivysaur", "Planta", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/[i].png"),
+            Pokemon("Venusaur", "Planta", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/[i].png"),
+            Pokemon("Charmander", "Fuego", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/[i].png"),
+            Pokemon("Charmeleon", "Fuego", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/[i].png"),
+            Pokemon("Charizard", "Fuego", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/[i].png"),
+            Pokemon("Squirtle", "Agua", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/[i].png"),
+            Pokemon("Wartortle", "Agua", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/[i].png"),
+            Pokemon("Blastoise", "Agua", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/[i].png")
         )
 }
