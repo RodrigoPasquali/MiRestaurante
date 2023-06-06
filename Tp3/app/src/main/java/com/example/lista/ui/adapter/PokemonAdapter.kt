@@ -9,7 +9,7 @@ import com.example.lista.model.Pokemon
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.RequestCreator
 
-class PokemonAdapter(private val pokemonList: List<Pokemon>) :
+class PokemonAdapter(private val pokemonList: List<Pokemon>, val itemCallback: (item: Pokemon) -> Unit) :
     RecyclerView.Adapter<PokemonAdapter.PokemonAdapterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonAdapterViewHolder {
@@ -22,13 +22,18 @@ class PokemonAdapter(private val pokemonList: List<Pokemon>) :
     }
 
     override fun onBindViewHolder(holder: PokemonAdapterViewHolder, position: Int) {
-        holder.binding.name.text = pokemonList[position].name
-        holder.binding.type.text = pokemonList[position].type
-        getPokemonImage(position)?.error(R.drawable.baseline_error_24)?.into(holder.binding.image)
+        val pokemon = pokemonList[position]
+        holder.binding.name.text = pokemon.name
+        holder.binding.type.text = pokemon.type
+        getPokemonImage(pokemon, position)?.error(R.drawable.baseline_error_24)?.into(holder.binding.image)
+
+        holder.itemView.setOnClickListener {
+            itemCallback(pokemon)
+        }
     }
 
-    private fun getPokemonImage(position: Int): RequestCreator? {
-        val imageUrl = pokemonList[position].urlImage.replace("[i]", (position + 1).toString())
+    private fun getPokemonImage(pokemon: Pokemon, position: Int): RequestCreator? {
+        val imageUrl = pokemon.urlImage.replace("[i]", (position + 1).toString())
         return Picasso.get().load(imageUrl)
     }
 
