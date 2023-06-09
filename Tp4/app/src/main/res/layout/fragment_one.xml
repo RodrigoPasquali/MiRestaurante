@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/orange"
-    tools:context=".OneFragment">
+    tools:context=".fragments.OneFragment">
 
     <TextView
+        android:id="@+id/textToShow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/fragment_one"

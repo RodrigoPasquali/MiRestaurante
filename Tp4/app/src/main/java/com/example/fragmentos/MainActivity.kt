@@ -2,12 +2,17 @@
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.fragmentos.databinding.ActivityMainBinding
+import com.example.fragmentos.fragments.OneFragment
+import com.example.fragmentos.fragments.TwoFragment
 
  class MainActivity : AppCompatActivity() {
      private lateinit var binding: ActivityMainBinding
      private lateinit var fragment: Fragment
+     private lateinit var viewModel: MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,27 +20,38 @@ import com.example.fragmentos.databinding.ActivityMainBinding
         val view = binding.root
         setContentView(view)
 
-        onButtonOneClick()
-        onButtonTwoClick()
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+
+        sendTextToFragments()
+
+        onButtonClick(binding.buttonOne)
+        onButtonClick(binding.buttonTwo)
     }
 
-    private fun onButtonOneClick() {
-        binding.buttonOne.setOnClickListener {
-            fragment = OneFragment()
-            changeFragment()
-        }
-    }
+     private fun onButtonClick(button: TextView) {
+         button.setOnClickListener {
+             fragment = selectFragment(button)
+             changeFragment()
+         }
+     }
 
-    private fun onButtonTwoClick() {
-        binding.buttonTwo.setOnClickListener {
-            fragment = TwoFragment()
-            changeFragment()
-        }
-    }
+     private fun selectFragment(button: TextView): Fragment {
+         return if (button == binding.buttonOne)  {
+             OneFragment()
+         } else {
+             TwoFragment()
+         }
+     }
 
     private fun changeFragment() {
         fragment.let {
             supportFragmentManager.beginTransaction().replace(R.id.containerFragment, it).commit()
         }
     }
+
+     private fun sendTextToFragments() {
+         binding.sendButton.setOnClickListener {
+            viewModel.setText(binding.enterText.text.toString())
+         }
+     }
 }
