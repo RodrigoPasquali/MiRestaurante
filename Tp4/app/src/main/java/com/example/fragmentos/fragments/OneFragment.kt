@@ -11,13 +11,15 @@ import com.example.fragmentos.databinding.FragmentOneBinding
 
 class OneFragment : Fragment() {
     private lateinit var binding: FragmentOneBinding
-    private lateinit var viewModel: MainActivityViewModel
+    private lateinit var mainActivityViewModel: MainActivityViewModel
+    private lateinit var oneFragmentViewModel: OneFragmentViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         activity?.let {
-            viewModel = ViewModelProvider(it)[MainActivityViewModel::class.java]
+            mainActivityViewModel = ViewModelProvider(it)[MainActivityViewModel::class.java]
+            oneFragmentViewModel = ViewModelProvider(it)[OneFragmentViewModel::class.java]
         }
     }
 
@@ -33,11 +35,26 @@ class OneFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setTextToShow()
+        sendColor()
     }
 
     private fun setTextToShow() {
-        viewModel.enterText.observe(viewLifecycleOwner){
-            binding.textToShow.text = viewModel.enterText.value + " 1"
+        mainActivityViewModel.enterText.observe(viewLifecycleOwner){
+            binding.textToShow.text = mainActivityViewModel.enterText.value + " 1"
+        }
+    }
+
+    private fun sendColor() {
+        binding.color1.setOnClickListener {
+            oneFragmentViewModel.setColor(1)
+        }
+
+        binding.color2.setOnClickListener {
+            oneFragmentViewModel.setColor(2)
+        }
+
+        binding.color3.setOnClickListener {
+            oneFragmentViewModel.setColor(3)
         }
     }
 }

@@ -12,7 +12,7 @@ import com.example.fragmentos.fragments.TwoFragment
  class MainActivity : AppCompatActivity() {
      private lateinit var binding: ActivityMainBinding
      private lateinit var fragment: Fragment
-     private lateinit var viewModel: MainActivityViewModel
+     private lateinit var mainActivityViewModel: MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +20,7 @@ import com.example.fragmentos.fragments.TwoFragment
         val view = binding.root
         setContentView(view)
 
-        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        mainActivityViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
         sendTextToFragments()
 
@@ -51,7 +51,7 @@ import com.example.fragmentos.fragments.TwoFragment
 
      private fun sendTextToFragments() {
          binding.sendButton.setOnClickListener {
-            viewModel.setText(binding.enterText.text.toString())
+            mainActivityViewModel.setText(binding.enterText.text.toString())
          }
      }
 }
