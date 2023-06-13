@@ -39,4 +39,11 @@
             android:layout_marginTop="20dp"
             android:src="@drawable/sync_problem"/>
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/loadingBar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 </FrameLayout>

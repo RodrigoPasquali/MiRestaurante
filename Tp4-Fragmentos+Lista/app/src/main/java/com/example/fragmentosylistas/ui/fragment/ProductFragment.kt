@@ -1,6 +1,7 @@
 package com.example.fragmentosylistas.ui.fragment
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +29,10 @@ class ProductFragment : Fragment() {
 
 
         val products = loadProducts()
-        setupAdapter(products)
+        changeState(ProductListState.Loading)
+        Handler().postDelayed ({
+            setupAdapter(products)
+        }, 3000)
     }
 
     private fun loadProducts(): List<Product> {
@@ -61,21 +65,31 @@ class ProductFragment : Fragment() {
     private fun changeState(state: ProductListState) {
         when (state) {
             is ProductListState.EmptyProducts -> {
+                binding.loadingBar.visibility = View.GONE
+                binding.list.visibility = View.GONE
                 binding.emptyProducts.visibility = View.VISIBLE
                 binding.emptyProductsText.text = state.message
-                binding.list.visibility = View.GONE
             }
 
             is ProductListState.ReadyProducts -> {
                 adapter.updateProductList(state.products)
+                binding.loadingBar.visibility = View.GONE
                 binding.emptyProducts.visibility = View.GONE
                 binding.list.visibility = View.VISIBLE
             }
+
+            is ProductListState.Loading -> {
+                binding.emptyProducts.visibility = View.GONE
+                binding.list.visibility = View.GONE
+                binding.loadingBar.visibility = View.VISIBLE
+            }
+
         }
     }
 
-    private sealed class ProductListState() {
+    private sealed class ProductListState {
         class ReadyProducts(val products: List<Product>) : ProductListState()
         class EmptyProducts(val message: String) : ProductListState()
+        object Loading : ProductListState()
     }
 }
