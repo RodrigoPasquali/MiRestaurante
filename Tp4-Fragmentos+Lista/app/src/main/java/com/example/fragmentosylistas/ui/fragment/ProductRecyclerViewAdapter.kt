@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 
-import com.example.fragmentosylistas.databinding.FragmentItemBinding
+import com.example.fragmentosylistas.databinding.ItemListBinding
 import com.example.fragmentosylistas.model.Product
 
 class ProductRecyclerViewAdapter(
-    private val products: List<Product> = listOf()
+    private var products: List<Product> = listOf()
 ) : RecyclerView.Adapter<ProductRecyclerViewAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         return ProductViewHolder(
-            FragmentItemBinding.inflate(
+            ItemListBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -30,7 +30,12 @@ class ProductRecyclerViewAdapter(
 
     override fun getItemCount(): Int = products.size
 
-    inner class ProductViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    fun updateProductList(updateProducts: List<Product>) {
+        this.products = updateProducts
+        notifyDataSetChanged()
+    }
+
+    inner class ProductViewHolder(binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root) {
         val itemId: TextView = binding.itemId
         val itemName: TextView = binding.itemName
     }
