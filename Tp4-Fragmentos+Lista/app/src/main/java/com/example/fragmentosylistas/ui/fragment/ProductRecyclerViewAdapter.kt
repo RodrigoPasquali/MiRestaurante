@@ -34,5 +34,4 @@ class ProductRecyclerViewAdapter(
         val itemId: TextView = binding.itemId
         val itemName: TextView = binding.itemName
     }
-
 }

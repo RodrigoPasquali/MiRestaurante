@@ -14,11 +14,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initProductList()
+        onUpdateButtonClick()
     }
 
-    private fun initProductList() {
+    private fun loadProductList() {
         productFragment = ProductFragment()
         supportFragmentManager.beginTransaction().replace(binding.productListContainer.id, productFragment).commit()
+    }
+
+    private fun onUpdateButtonClick() {
+        binding.updateButton.setOnClickListener {
+            loadProductList()
+        }
     }
 }
