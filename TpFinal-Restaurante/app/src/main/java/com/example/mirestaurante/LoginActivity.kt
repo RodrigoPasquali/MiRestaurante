@@ -20,19 +20,21 @@ class LoginActivity : AppCompatActivity() {
 
     private fun onButtonEnterClick() {
         binding.loginButton.setOnClickListener {
-            saveUserLogin()
+            if (binding.rememberUser.isChecked) {
+                saveUserLogin()
+            } else {
+                clearUserLogin()
+            }
         }
     }
 
     private fun saveUserLogin() {
-        if (binding.rememberUser.isChecked) {
-            val editorSharedPreferences = getSharedPreferencesLogin().edit()
+        val editorSharedPreferences = getSharedPreferencesLogin().edit()
 
-            editorSharedPreferences.apply {
-                putString(EMAIL_KEY, binding.email.text.toString())
-                putString(PASSWORD_KEY, binding.password.text.toString())
-            }.apply()
-        }
+        editorSharedPreferences.apply {
+            putString(EMAIL_KEY, binding.email.text.toString())
+            putString(PASSWORD_KEY, binding.password.text.toString())
+        }.apply()
     }
 
     private fun getLoginUser() {
@@ -47,6 +49,10 @@ class LoginActivity : AppCompatActivity() {
             LOGIN_PREFERENCES_KEY,
             Context.MODE_PRIVATE
         )
+    }
+
+    private fun clearUserLogin() {
+        getSharedPreferencesLogin().edit().clear().apply()
     }
 
     private companion object {
