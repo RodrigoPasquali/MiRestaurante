@@ -65,7 +65,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <CheckBox
+        android:id="@+id/rememberUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recordarme"
+        android:textColor="@color/white"
+        android:buttonTint="@color/primary_color"
+        app:layout_constraintTop_toBottomOf="@id/password"
+        app:layout_constraintBottom_toTopOf="@id/loginButton"
+        app:layout_constraintStart_toStartOf="@id/password" />
+
     <Button
+        android:id="@+id/loginButton"
         android:layout_width="@dimen/login_box_width"
         android:layout_height="@dimen/login_box_height"
         android:layout_marginTop="30dp"
@@ -74,5 +86,5 @@
         android:background="@drawable/button_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password" />
+        app:layout_constraintTop_toBottomOf="@id/rememberUser" />
 </androidx.constraintlayout.widget.ConstraintLayout>
