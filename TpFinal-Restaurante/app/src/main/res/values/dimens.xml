@@ -2,4 +2,6 @@
 <resources>
     <dimen name="login_box_width">300dp</dimen>
     <dimen name="login_box_height">45dp</dimen>
+    <dimen name="login_heigth_boxes_space">15dp</dimen>
+    <dimen name="login_box_padding">10dp</dimen>
 </resources>

@@ -5,4 +5,9 @@
     <string name="contrasena">Contraseña</string>
     <string name="ingresar">Ingresar</string>
     <string name="recordarme">Recordarme</string>
+    <string name="registrarme">REGISTRARME</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="calle">Calle</string>
+    <string name="numero_calle">N°Calle</string>
 </resources>

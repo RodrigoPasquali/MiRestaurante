@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuidline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:contentDescription=""
+        android:src="@drawable/restaurant_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/topGuidline" />
+
+    <TextView
+        android:id="@+id/loginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registrarme"
+        android:textColor="@color/primary_color"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/logo" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="@dimen/login_box_width"
+        android:layout_height="@dimen/login_box_height"
+        android:layout_marginTop="20dp"
+        android:autofillHints=""
+        android:background="@drawable/text_box"
+        android:hint="@string/nombre"
+        android:inputType="text"
+        android:padding="@dimen/login_box_padding"
+        android:textColor="@color/white"
+        android:textColorHint="@color/hint_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginText" />
+
+    <EditText
+        android:id="@+id/lastname"
+        android:layout_width="@dimen/login_box_width"
+        android:layout_height="@dimen/login_box_height"
+        android:layout_marginTop="12dp"
+        android:autofillHints=""
+        android:background="@drawable/text_box"
+        android:hint="@string/apellido"
+        android:inputType="text"
+        android:padding="@dimen/login_box_padding"
+        android:textColor="@color/white"
+        android:textColorHint="@color/hint_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name" />
+
+    <LinearLayout
+        android:id="@+id/streetContainer"
+        android:layout_width="@dimen/login_box_width"
+        android:layout_height="@dimen/login_box_height"
+        android:layout_marginTop="@dimen/login_heigth_boxes_space"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lastname">
+
+        <EditText
+            android:id="@+id/streetName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="2"
+            android:autofillHints=""
+            android:background="@drawable/text_box"
+            android:hint="@string/calle"
+            android:inputType="text"
+            android:padding="@dimen/login_box_padding"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hint_color"
+            app:layout_constraintEnd_toStartOf="@id/streetNumber"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lastname" />
+
+        <EditText
+            android:id="@+id/streetNumber"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:background="@drawable/text_box"
+            android:hint="@string/numero_calle"
+            android:inputType="number"
+            android:padding="@dimen/login_box_padding"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hint_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/streetName"
+            app:layout_constraintTop_toBottomOf="@id/lastname" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="@dimen/login_box_width"
+        android:layout_height="@dimen/login_box_height"
+        android:layout_marginTop="@dimen/login_heigth_boxes_space"
+        android:autofillHints=""
+        android:background="@drawable/text_box"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:padding="@dimen/login_box_padding"
+        android:textColor="@color/white"
+        android:textColorHint="@color/hint_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/streetContainer" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="@dimen/login_box_width"
+        android:layout_height="@dimen/login_box_height"
+        android:layout_marginTop="@dimen/login_heigth_boxes_space"
+        android:autofillHints=""
+        android:background="@drawable/text_box"
+        android:hint="@string/contrasena"
+        android:inputType="textPassword"
+        android:padding="@dimen/login_box_padding"
+        android:textColor="@color/white"
+        android:textColorHint="@color/hint_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/email" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="@dimen/login_box_width"
+        android:layout_height="@dimen/login_box_height"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/login_button_style"
+        android:focusable="true"
+        android:text="@string/registrarme"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password" />
+</androidx.constraintlayout.widget.ConstraintLayout>
