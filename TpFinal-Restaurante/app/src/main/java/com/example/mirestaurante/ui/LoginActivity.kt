@@ -1,4 +1,4 @@
-package com.example.mirestaurante
+package com.example.mirestaurante.ui
 
 import android.content.Context
 import android.content.SharedPreferences
