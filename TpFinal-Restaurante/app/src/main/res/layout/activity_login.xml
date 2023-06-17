@@ -79,4 +79,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rememberUser" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="@dimen/login_box_width"
+        android:layout_height="@dimen/login_box_height"
+        android:layout_marginTop="20dp"
+        style="@style/buttonStyle"
+        android:text="@string/registrarme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

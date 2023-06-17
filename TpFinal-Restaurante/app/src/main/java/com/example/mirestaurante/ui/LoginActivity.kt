@@ -1,6 +1,7 @@
 package com.example.mirestaurante.ui
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,16 +16,23 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         getLoginUser()
-        onButtonEnterClick()
+        onEnterButtonClick()
+        onRegisterButtonClick()
     }
 
-    private fun onButtonEnterClick() {
+    private fun onEnterButtonClick() {
         binding.loginButton.setOnClickListener {
             if (binding.rememberUser.isChecked) {
                 saveUserLogin()
             } else {
                 clearUserLogin()
             }
+        }
+    }
+
+    private fun onRegisterButtonClick() {
+        binding.registerButton.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
