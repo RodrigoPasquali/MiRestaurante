@@ -5,10 +5,16 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.example.mirestaurante.databinding.ActivityLoginBinding
+import com.example.mirestaurante.infraestructure.database.AppDataBase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
+    private val appBase by lazy { AppDataBase.getInstance(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,11 +28,33 @@ class LoginActivity : AppCompatActivity() {
 
     private fun onEnterButtonClick() {
         binding.loginButton.setOnClickListener {
-            if (binding.rememberUser.isChecked) {
-                saveUserLogin()
-            } else {
-                clearUserLogin()
+            lifecycleScope.launch(Dispatchers.IO) {
+                if (isCredentialExists()) {
+                    runOnUiThread {
+                        rememberAction()
+                        Toast.makeText(applicationContext, "Login exitoso", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    runOnUiThread {
+                        Toast.makeText(applicationContext, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
+        }
+    }
+
+    private fun isCredentialExists(): Boolean {
+        return authenticateUser(
+            binding.email.text.toString(),
+            binding.password.text.toString()
+        ) == VERIFIED_USER
+    }
+
+    private fun rememberAction() {
+        if (binding.rememberUser.isChecked) {
+            saveUserLogin()
+        } else {
+            clearUserLogin()
         }
     }
 
@@ -63,9 +91,14 @@ class LoginActivity : AppCompatActivity() {
         getSharedPreferencesLogin().edit().clear().apply()
     }
 
+    private fun authenticateUser(email: String, password: String): Int {
+        return appBase.getUserDao().authenticate(email, password)
+    }
+
     private companion object {
         const val LOGIN_PREFERENCES_KEY = "login_preference_key"
         const val EMAIL_KEY = "email_key"
         const val PASSWORD_KEY = "password_key"
+        const val VERIFIED_USER = 1
     }
 }
