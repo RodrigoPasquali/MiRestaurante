@@ -3,6 +3,7 @@ package com.example.mirestaurante.ui
 import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.example.mirestaurante.R
@@ -27,21 +28,36 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun onRegisterButtonClick() {
         binding.registerButton.setOnClickListener {
-            binding.registerButton.isEnabled = false
-            binding.registerButton.isClickable = false
-            showProgressDialog()
             lifecycleScope.launch(Dispatchers.IO) {
-                Thread.sleep(5000)
-
-
-
-                registerUser()
-
-                runOnUiThread {
-                    progressDialog.dismiss()
-                    showSuccessfulUserRegistration()
+                if (areThereEmptyFields()) {
+                    showEmptyFieldsMessage()
+                } else {
+                    runOnUiThread {
+                        disableRegistrationButton()
+                        showProgressDialog()
+                    }
+                    Thread.sleep(5000)
+                    registerUser()
+                    runOnUiThread {
+                        progressDialog.dismiss()
+                        showSuccessfulUserRegistration()
+                    }
                 }
             }
+        }
+    }
+
+    private fun disableRegistrationButton() {
+        binding.registerButton.isEnabled = false
+        binding.registerButton.isClickable = false
+    }
+    private fun showEmptyFieldsMessage() {
+        runOnUiThread {
+            Toast.makeText(
+                applicationContext,
+                "Por favor complete todos los campos",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -56,6 +72,12 @@ class RegisterActivity : AppCompatActivity() {
                 binding.password.text.toString()
             )
         )
+    }
+
+    private fun areThereEmptyFields(): Boolean {
+        return binding.name.toString().isEmpty() || binding.lastname.text.isEmpty()
+                || binding.streetName.text.isEmpty() || binding.streetNumber.text.isEmpty()
+                || binding.email.text.isEmpty() || binding.password.text.isEmpty()
     }
 
     private fun getStreetNumber(number: String): Int {
