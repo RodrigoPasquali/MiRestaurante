@@ -45,11 +45,19 @@ class RegisterActivity : AppCompatActivity() {
                 binding.name.text.toString(),
                 binding.lastname.text.toString(),
                 binding.streetName.text.toString(),
-                binding.streetNumber.text.toString().toInt(),
+                getStreetNumber(binding.streetNumber.text.toString()),
                 binding.email.text.toString(),
                 binding.password.text.toString()
             )
         )
+    }
+
+    private fun getStreetNumber(number: String): Int {
+        return if (number.isNotEmpty()) {
+            number.toInt()
+        } else {
+            0
+        }
     }
 
     private fun showSuccessfulUserRegistration() {
