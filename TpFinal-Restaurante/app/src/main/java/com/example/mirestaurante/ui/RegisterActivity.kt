@@ -2,8 +2,9 @@ package com.example.mirestaurante.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
+import com.example.mirestaurante.R
 import com.example.mirestaurante.databinding.ActivityRegisterBinding
 import com.example.mirestaurante.infraestructure.database.AppDataBase
 import com.example.mirestaurante.model.User
@@ -25,6 +26,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun onRegisterButtonClick() {
         binding.registerButton.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
+                Thread.sleep(5000)
                 appBase.getUserDao().create(
                     User(
                         binding.name.text.toString(),
@@ -35,8 +37,24 @@ class RegisterActivity : AppCompatActivity() {
                         binding.password.text.toString()
                     )
                 )
+
+                runOnUiThread {
+                    showSuccessfulUserRegistration()
+                }
             }
+
         }
-        Toast.makeText(this, "Registrado con exito", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showSuccessfulUserRegistration() {
+        val alertDialog = AlertDialog.Builder(this)
+
+        alertDialog.apply {
+            setTitle(getString(R.string.user_registration))
+            setMessage(getString(R.string.successful_user_resgistration))
+            setPositiveButton(getString(R.string.continue_text)) { _, _ ->
+                onBackPressed()
+            }
+        }.create().show()
     }
 }

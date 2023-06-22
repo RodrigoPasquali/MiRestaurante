@@ -10,4 +10,7 @@
     <string name="apellido">Apellido</string>
     <string name="calle">Calle</string>
     <string name="numero_calle">N°Calle</string>
+    <string name="user_registration">Registo de Usuario</string>
+    <string name="successful_user_resgistration">Se registro exitosamente el usuario!!</string>
+    <string name="continue_text">Continuar</string>
 </resources>
