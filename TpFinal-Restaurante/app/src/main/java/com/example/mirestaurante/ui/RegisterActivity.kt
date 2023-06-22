@@ -25,6 +25,8 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun onRegisterButtonClick() {
         binding.registerButton.setOnClickListener {
+            binding.registerButton.isEnabled = false
+            binding.registerButton.isClickable = false
             lifecycleScope.launch(Dispatchers.IO) {
                 Thread.sleep(5000)
 
