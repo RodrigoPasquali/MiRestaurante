@@ -1,5 +1,6 @@
 package com.example.mirestaurante.ui
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.example.mirestaurante.R
 import com.example.mirestaurante.databinding.ActivityLoginBinding
 import com.example.mirestaurante.infraestructure.database.AppDataBase
 import kotlinx.coroutines.Dispatchers
@@ -14,6 +16,7 @@ import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
+    private lateinit var progressDialog: ProgressDialog
     private val appBase by lazy { AppDataBase.getInstance(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +34,12 @@ class LoginActivity : AppCompatActivity() {
             lifecycleScope.launch(Dispatchers.IO) {
                 if (isCredentialExists()) {
                     runOnUiThread {
+                        showProgressDialog()
                         rememberAction()
+                    }
+                        Thread.sleep(5000)
+                        progressDialog.dismiss()
+                    runOnUiThread {
                         Toast.makeText(applicationContext, "Login exitoso", Toast.LENGTH_SHORT).show()
                     }
                 } else {
@@ -41,6 +49,14 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showProgressDialog() {
+        progressDialog = ProgressDialog(this)
+        progressDialog.apply {
+            setTitle(getString(R.string.login))
+            setMessage(getString(R.string.user_authenticator_message))
+        }.show()
     }
 
     private fun isCredentialExists(): Boolean {
