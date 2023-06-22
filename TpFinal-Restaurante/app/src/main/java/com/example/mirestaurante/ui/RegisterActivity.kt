@@ -1,5 +1,6 @@
 package com.example.mirestaurante.ui
 
+import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
@@ -13,6 +14,7 @@ import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
+    private lateinit var progressDialog: ProgressDialog
     private val appBase by lazy { AppDataBase.getInstance(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,12 +29,16 @@ class RegisterActivity : AppCompatActivity() {
         binding.registerButton.setOnClickListener {
             binding.registerButton.isEnabled = false
             binding.registerButton.isClickable = false
+            showProgressDialog()
             lifecycleScope.launch(Dispatchers.IO) {
                 Thread.sleep(5000)
+
+
 
                 registerUser()
 
                 runOnUiThread {
+                    progressDialog.dismiss()
                     showSuccessfulUserRegistration()
                 }
             }
@@ -58,6 +64,14 @@ class RegisterActivity : AppCompatActivity() {
         } else {
             0
         }
+    }
+
+    private fun showProgressDialog() {
+        progressDialog = ProgressDialog(this)
+        progressDialog.apply {
+            setTitle(getString(R.string.user_registration))
+            setMessage(getString(R.string.wait_please))
+        }.show()
     }
 
     private fun showSuccessfulUserRegistration() {

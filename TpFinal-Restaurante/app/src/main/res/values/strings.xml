@@ -13,4 +13,5 @@
     <string name="user_registration">Registo de Usuario</string>
     <string name="successful_user_resgistration">Se registro exitosamente el usuario!!</string>
     <string name="continue_text">Continuar</string>
+    <string name="wait_please">Espere por favor</string>
 </resources>
