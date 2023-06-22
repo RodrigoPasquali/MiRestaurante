@@ -58,6 +58,8 @@ class RegisterActivity : AppCompatActivity() {
         alertDialog.apply {
             setTitle(getString(R.string.user_registration))
             setMessage(getString(R.string.successful_user_resgistration))
+            setCancelable(false)
+            setFinishOnTouchOutside(false)
             setPositiveButton(getString(R.string.continue_text)) { _, _ ->
                 onBackPressed()
             }
