@@ -27,23 +27,27 @@ class RegisterActivity : AppCompatActivity() {
         binding.registerButton.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
                 Thread.sleep(5000)
-                appBase.getUserDao().create(
-                    User(
-                        binding.name.text.toString(),
-                        binding.lastname.text.toString(),
-                        binding.streetName.text.toString(),
-                        binding.streetNumber.text.toString().toInt(),
-                        binding.email.text.toString(),
-                        binding.password.text.toString()
-                    )
-                )
+
+                registerUser()
 
                 runOnUiThread {
                     showSuccessfulUserRegistration()
                 }
             }
-
         }
+    }
+
+    private fun registerUser() {
+        appBase.getUserDao().create(
+            User(
+                binding.name.text.toString(),
+                binding.lastname.text.toString(),
+                binding.streetName.text.toString(),
+                binding.streetNumber.text.toString().toInt(),
+                binding.email.text.toString(),
+                binding.password.text.toString()
+            )
+        )
     }
 
     private fun showSuccessfulUserRegistration() {
