@@ -31,23 +31,42 @@ class LoginActivity : AppCompatActivity() {
 
     private fun onEnterButtonClick() {
         binding.loginButton.setOnClickListener {
+            disableLoginButtons()
+            showProgressDialog()
             lifecycleScope.launch(Dispatchers.IO) {
+                Thread.sleep(5000)
                 if (isCredentialExists()) {
-                    runOnUiThread {
-                        showProgressDialog()
-                        rememberAction()
-                    }
-                        Thread.sleep(5000)
-                        progressDialog.dismiss()
-                    runOnUiThread {
-                        Toast.makeText(applicationContext, "Login exitoso", Toast.LENGTH_SHORT).show()
-                    }
+                    onMatchingCredentialFound()
                 } else {
-                    runOnUiThread {
-                        Toast.makeText(applicationContext, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
-                    }
+                    onMatchingCredentialNotFound()
                 }
             }
+        }
+    }
+
+    private fun onMatchingCredentialFound() {
+        runOnUiThread {
+            rememberAction()
+        }
+
+        progressDialog.dismiss()
+        runOnUiThread {
+            enableLoginButtons()
+            Toast.makeText(applicationContext, "Login exitoso", Toast.LENGTH_SHORT)
+                .show()
+        }
+    }
+
+    private fun onMatchingCredentialNotFound() {
+        progressDialog.dismiss()
+
+        runOnUiThread {
+            enableLoginButtons()
+            Toast.makeText(
+                applicationContext,
+                "Credenciales incorrectas",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -57,6 +76,20 @@ class LoginActivity : AppCompatActivity() {
             setTitle(getString(R.string.login))
             setMessage(getString(R.string.user_authenticator_message))
         }.show()
+    }
+
+    private fun disableLoginButtons() {
+        binding.registerButton.isEnabled = false
+        binding.registerButton.isClickable = false
+        binding.loginButton.isEnabled = false
+        binding.loginButton.isClickable = false
+    }
+
+    private fun enableLoginButtons() {
+        binding.registerButton.isEnabled = true
+        binding.registerButton.isClickable = true
+        binding.loginButton.isEnabled = true
+        binding.loginButton.isClickable = true
     }
 
     private fun isCredentialExists(): Boolean {
