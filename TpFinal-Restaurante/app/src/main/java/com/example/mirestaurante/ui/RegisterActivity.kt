@@ -93,6 +93,8 @@ class RegisterActivity : AppCompatActivity() {
         progressDialog.apply {
             setTitle(getString(R.string.user_registration))
             setMessage(getString(R.string.wait_please))
+            setCancelable(false)
+            setFinishOnTouchOutside(false)
         }.show()
     }
 
