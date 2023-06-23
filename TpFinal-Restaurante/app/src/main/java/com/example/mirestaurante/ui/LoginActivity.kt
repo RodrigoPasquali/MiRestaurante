@@ -92,6 +92,8 @@ class LoginActivity : AppCompatActivity() {
         progressDialog.apply {
             setTitle(getString(R.string.login))
             setMessage(getString(R.string.user_authenticator_message))
+            setCancelable(false)
+            setFinishOnTouchOutside(false)
         }.show()
     }
 
@@ -151,13 +153,6 @@ class LoginActivity : AppCompatActivity() {
                 false
             )
     }
-
-//    private fun getSharedPreferencesLogin(): SharedPreferences {
-//        return getSharedPreferences(
-//            LOGIN_PREFERENCES_KEY,
-//            Context.MODE_PRIVATE
-//        )
-//    }
 
     private fun clearUserLogin() {
         getSharedPreferencesLogin().edit().clear().apply()
