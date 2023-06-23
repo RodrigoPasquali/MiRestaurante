@@ -100,7 +100,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun rememberAction() {
-        if (binding.rememberUser.isChecked) {
+        if (binding.rememberUserCheckbox.isChecked) {
             saveUserLogin()
         } else {
             clearUserLogin()
@@ -119,6 +119,7 @@ class LoginActivity : AppCompatActivity() {
         editorSharedPreferences.apply {
             putString(EMAIL_KEY, binding.email.text.toString())
             putString(PASSWORD_KEY, binding.password.text.toString())
+            putBoolean(REMEMBER_KEY, binding.rememberUserCheckbox.isChecked)
         }.apply()
     }
 
@@ -127,6 +128,11 @@ class LoginActivity : AppCompatActivity() {
 
         binding.email.setText(sharedPreferences.getString(EMAIL_KEY, ""))
         binding.password.setText(sharedPreferences.getString(PASSWORD_KEY, ""))
+        binding.rememberUserCheckbox.isChecked =
+            sharedPreferences.getBoolean(
+                REMEMBER_KEY,
+                false
+            )
     }
 
     private fun getSharedPreferencesLogin(): SharedPreferences {
@@ -148,6 +154,7 @@ class LoginActivity : AppCompatActivity() {
         const val LOGIN_PREFERENCES_KEY = "login_preference_key"
         const val EMAIL_KEY = "email_key"
         const val PASSWORD_KEY = "password_key"
+        const val REMEMBER_KEY = "remember_key"
         const val VERIFIED_USER = 1
     }
 }
