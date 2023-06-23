@@ -5,5 +5,7 @@
     <color name="gray">#616161</color>
     <color name="hint_color">#918F8F</color>
     <color name="primary_color">#710404</color>
+    <color name="transparent_primary_color">#99710404</color>
     <color name="secondary_color">#C10E0E</color>
+    <color name="transparent_secondary_color">#99C10E0E</color>
 </resources>

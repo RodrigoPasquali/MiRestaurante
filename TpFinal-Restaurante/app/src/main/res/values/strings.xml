@@ -15,4 +15,6 @@
     <string name="continue_text">Continuar</string>
     <string name="wait_please">Espere por favor</string>
     <string name="user_authenticator_message">Por favor espere mientras se validan credenciales</string>
+    <string name="entradas">Entradas</string>
+    <string name="platos_principales">Platos principales</string>
 </resources>

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--    login-->
     <dimen name="login_box_width">300dp</dimen>
     <dimen name="login_box_height">45dp</dimen>
     <dimen name="login_heigth_boxes_space">15dp</dimen>
     <dimen name="login_box_padding">10dp</dimen>
+
+    <!--    menu-->
+    <dimen name="menu_button_height">45dp</dimen>
+    <dimen name="menu_button_width">300dp</dimen>
+    <dimen name="menu_button_padding">10dp</dimen>
+    <dimen name="menu_button_text_size">18dp</dimen>
 </resources>
