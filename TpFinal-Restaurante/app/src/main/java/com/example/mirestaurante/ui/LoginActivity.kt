@@ -1,19 +1,21 @@
 package com.example.mirestaurante.ui
 
 import android.app.ProgressDialog
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKeys
 import com.example.mirestaurante.R
 import com.example.mirestaurante.databinding.ActivityLoginBinding
 import com.example.mirestaurante.infraestructure.database.AppDataBase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
     private lateinit var progressDialog: ProgressDialog
@@ -42,6 +44,21 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun getSharedPreferencesLogin(): SharedPreferences{
+        return EncryptedSharedPreferences.create(
+            LOGIN_PREFERENCES_KEY,
+            getKeyAliasEncryptedSharedPreferences(),
+            applicationContext,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+    }
+
+    private fun getKeyAliasEncryptedSharedPreferences(): String {
+        val keyGenParameterSpec = MasterKeys.AES256_GCM_SPEC
+        return MasterKeys.getOrCreate(keyGenParameterSpec)
     }
 
     private fun onMatchingCredentialFound() {
@@ -135,12 +152,12 @@ class LoginActivity : AppCompatActivity() {
             )
     }
 
-    private fun getSharedPreferencesLogin(): SharedPreferences {
-        return getSharedPreferences(
-            LOGIN_PREFERENCES_KEY,
-            Context.MODE_PRIVATE
-        )
-    }
+//    private fun getSharedPreferencesLogin(): SharedPreferences {
+//        return getSharedPreferences(
+//            LOGIN_PREFERENCES_KEY,
+//            Context.MODE_PRIVATE
+//        )
+//    }
 
     private fun clearUserLogin() {
         getSharedPreferencesLogin().edit().clear().apply()
