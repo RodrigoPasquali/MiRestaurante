@@ -69,9 +69,9 @@ class LoginActivity : AppCompatActivity() {
         progressDialog.dismiss()
         runOnUiThread {
             enableLoginButtons()
-            Toast.makeText(applicationContext, "Login exitoso", Toast.LENGTH_SHORT)
-                .show()
         }
+
+        startActivity(Intent(this, MenuActivity::class.java))
     }
 
     private fun onMatchingCredentialNotFound() {
