@@ -71,7 +71,8 @@ class LoginActivity : AppCompatActivity() {
             enableLoginButtons()
         }
 
-        startActivity(Intent(this, MenuActivity::class.java))
+//        startActivity(Intent(this, MenuActivity::class.java))
+        startActivity(Intent(this, NavigationDrawerActivity::class.java))
     }
 
     private fun onMatchingCredentialNotFound() {
