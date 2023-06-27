@@ -30,4 +30,6 @@
     <string name="menu_platos">Platos</string>
     <string name="menu">Menu</string>
     <string name="mi_restaurante">Mi restaurante</string>
+    <string name="user_name">User Name</string>
+    <string name="user_description">User Description</string>
 </resources>
