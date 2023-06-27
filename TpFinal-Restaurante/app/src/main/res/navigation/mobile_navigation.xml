@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.mirestaurante.ui.platosPrincipales.PlatosPrincipalesFragment"
-        android:label="@string/menu_platos_principales"
-        tools:layout="@layout/fragment_platos_principales" />
+        android:name="com.example.mirestaurante.ui.platos.PlatosFragment"
+        android:label="@string/menu_platos"
+        tools:layout="@layout/fragment_platos" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.mirestaurante.ui.platosPrincipales
+package com.example.mirestaurante.ui.platos
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

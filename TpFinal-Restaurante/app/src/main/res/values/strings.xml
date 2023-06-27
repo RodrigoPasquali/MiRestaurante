@@ -16,7 +16,7 @@
     <string name="wait_please">Espere por favor</string>
     <string name="user_authenticator_message">Por favor espere mientras se validan credenciales</string>
     <string name="bebidas">Bebidas</string>
-    <string name="platos_principales">Platos principales</string>
+    <string name="platos">Platos</string>
     <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -27,7 +27,7 @@
 
     <string name="menu_home">Menu</string>
     <string name="menu_bebidas">Bebidas</string>
-    <string name="menu_platos_principales">Platos Principales</string>
+    <string name="menu_platos">Platos</string>
     <string name="menu">Menu</string>
     <string name="mi_restaurante">Mi restaurante</string>
 </resources>
