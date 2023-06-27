@@ -34,13 +34,13 @@
         android:id="@+id/bebidas"
         android:layout_marginBottom="12dp"
         android:text="@string/bebidas"
-        app:layout_constraintBottom_toTopOf="@id/platoPrincipal"
+        app:layout_constraintBottom_toTopOf="@id/platos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         style="@style/menuButtonStyle"/>
 
     <Button
-        android:id="@+id/platoPrincipal"
+        android:id="@+id/platos"
         android:layout_marginBottom="100dp"
         android:text="@string/platos"
         app:layout_constraintBottom_toBottomOf="parent"
