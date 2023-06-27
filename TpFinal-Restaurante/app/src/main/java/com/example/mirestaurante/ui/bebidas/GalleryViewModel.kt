@@ -1,4 +1,4 @@
-package com.example.mirestaurante.ui.entradas
+package com.example.mirestaurante.ui.bebidas
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
