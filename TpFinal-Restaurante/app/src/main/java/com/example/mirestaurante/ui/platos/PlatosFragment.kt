@@ -22,14 +22,14 @@ class PlatosFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val slideshowViewModel =
-            ViewModelProvider(this).get(SlideshowViewModel::class.java)
+        val platosViewModel =
+            ViewModelProvider(this).get(PlatosViewModel::class.java)
 
         _binding = FragmentPlatosBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textSlideshow
-        slideshowViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textPlatos
+        platosViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

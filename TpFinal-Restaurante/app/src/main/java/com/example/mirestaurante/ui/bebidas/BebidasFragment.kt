@@ -21,14 +21,14 @@ class BebidasFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val galleryViewModel =
-            ViewModelProvider(this).get(GalleryViewModel::class.java)
+        val bebidasViewModel =
+            ViewModelProvider(this).get(BebidasViewModel::class.java)
 
         _binding = FragmentBebidasBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textGallery
-        galleryViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textBebidas
+        bebidasViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
