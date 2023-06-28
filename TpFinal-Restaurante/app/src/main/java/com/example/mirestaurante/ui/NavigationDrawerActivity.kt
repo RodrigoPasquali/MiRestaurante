@@ -14,7 +14,6 @@ import com.example.mirestaurante.R
 import com.example.mirestaurante.databinding.ActivityNavigationDrawerBinding
 
 class NavigationDrawerActivity : AppCompatActivity() {
-
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityNavigationDrawerBinding
 
@@ -31,6 +30,7 @@ class NavigationDrawerActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_navigation_drawer)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+        //Con esto doy la posibilidad de dejar el menu de hamburguesa en los fragmentos, o quitarlo
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_menu_home, R.id.nav_bebidas, R.id.nav_platos
@@ -40,11 +40,12 @@ class NavigationDrawerActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.navigation_drawer, menu)
-        return true
-    }
+// para agregar boton en la toolbar en la parte derecha(como los tres puntos de settings)
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        menuInflater.inflate(R.menu.navigation_drawer, menu)
+//        return true
+//    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_navigation_drawer)

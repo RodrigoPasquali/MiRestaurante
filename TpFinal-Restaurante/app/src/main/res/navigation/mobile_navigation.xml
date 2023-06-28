@@ -12,14 +12,12 @@
         tools:layout="@layout/fragment_menu" >
         <action
             android:id="@+id/action_nav_menu_home_to_nav_platos"
-            app:destination="@id/nav_platos"
-            app:launchSingleTop="false"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/nav_menu_home"
+            app:destination="@id/nav_platos" />
         <action
             android:id="@+id/action_nav_menu_home_to_nav_bebidas"
-            app:destination="@id/nav_bebidas"
-            app:launchSingleTop="false"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/nav_menu_home"
+            app:destination="@id/nav_bebidas" />
     </fragment>
 
     <fragment
@@ -29,14 +27,10 @@
         tools:layout="@layout/fragment_bebidas" >
         <action
             android:id="@+id/action_nav_bebidas_to_nav_menu_home"
-            app:destination="@id/nav_menu_home"
-            app:launchSingleTop="false"
-            app:popUpToInclusive="true" />
+            app:destination="@id/nav_menu_home" />
         <action
             android:id="@+id/action_nav_bebidas_to_nav_platos"
-            app:destination="@id/nav_platos"
-            app:launchSingleTop="false"
-            app:popUpToInclusive="true" />
+            app:destination="@id/nav_platos" />
     </fragment>
 
     <fragment
@@ -46,13 +40,9 @@
         tools:layout="@layout/fragment_platos" >
         <action
             android:id="@+id/action_nav_platos_to_nav_menu_home"
-            app:destination="@id/nav_menu_home"
-            app:launchSingleTop="false"
-            app:popUpToInclusive="true" />
+            app:destination="@id/nav_menu_home" />
         <action
             android:id="@+id/action_nav_platos_to_nav_bebidas"
-            app:destination="@id/nav_bebidas"
-            app:launchSingleTop="false"
-            app:popUpToInclusive="true" />
+            app:destination="@id/nav_bebidas" />
     </fragment>
 </navigation>
