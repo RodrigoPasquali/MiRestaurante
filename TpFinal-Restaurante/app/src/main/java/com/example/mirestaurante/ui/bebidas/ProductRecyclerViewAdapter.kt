@@ -33,12 +33,15 @@ class ProductRecyclerViewAdapter(
         val price = product.price
         holder.itemPrice.text = "$ $price"
 
-        val productImage = product.image ?: R.drawable.no_photo
-        Picasso.get().load(productImage).into(holder.itemImage)
+        Picasso.get().load(getProductImage(product)).into(holder.itemImage)
 
         holder.itemView.setOnClickListener {
             itemCallback(product)
         }
+    }
+
+    private fun getProductImage(product: Product): Int {
+        return product.image ?: R.drawable.no_photo
     }
 
     override fun getItemCount(): Int = products.size
