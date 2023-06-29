@@ -36,9 +36,12 @@ class BebidasFragment : Fragment() {
             Product(1001, "Coca-Cola 2L", "Gaseosa", 1000, "image1.jpg"),
             Product(1002, "Sprite 2L", "Gaseosa", 1000, "image2.jpg"),
             Product(1003, "Aquarios Naranja 1.5L", "Jugo", 850, "image3.jpg"),
-            Product(1004, "Villavicencio 1.5L", "Agua", 500, "image4.jpg"),
-            Product(1005, "Trapiche 750ml", "Vino", 7600, "image5.jpg"),
-            Product(1006, "Heneiken 710ml", "Cerveza", 700, "image6.jpg")
+            Product(1004, "Aquarios Pomelo 1.5L", "Jugo", 850, "image3.jpg"),
+            Product(1005, "Villavicencio 1.5L", "Agua", 500, "image4.jpg"),
+            Product(1006, "Trapiche 750ml", "Vino", 7600, "image5.jpg"),
+            Product(1007, "Benjamin 750ml", "Vino", 2800, "image6.jpg"),
+            Product(1008, "Heineken(lata) 710ml", "Cerveza", 700, "image6.jpg"),
+            Product(1009, "Heineken 1L", "Cerveza", 1200, "image6.jpg")
         )
     }
 
