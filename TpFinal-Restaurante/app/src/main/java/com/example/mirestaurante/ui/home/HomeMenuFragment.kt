@@ -41,15 +41,4 @@ class HomeMenuFragment : Fragment() {
             this.findNavController().navigate(R.id.action_nav_menu_home_to_nav_platos)
         }
     }
-
-//    private fun changeFragment(fragment: Fragment) {
-////        fragment.let {
-////            parentFragmentManager.beginTransaction()
-////                .replace(R.id.nav_host_fragment_content_navigation_drawer, it)
-////                .addToBackStack("menu")
-////                .commit()
-////        }
-//
-//        this.findNavController().navigate(R.id.action_nav_menu_home_to_nav_bebidas)
-//    }
 }
