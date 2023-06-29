@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mirestaurante.R
@@ -47,7 +48,10 @@ class BebidasFragment : Fragment() {
     }
 
     private fun setupAdapter(products: List<Product>) {
-        adapter = ProductRecyclerViewAdapter(products)
+        adapter = ProductRecyclerViewAdapter(products) {product ->
+            val productName = product.name
+            Toast.makeText(context, "Selecciono $productName", Toast.LENGTH_SHORT).show()
+        }
         binding.list.adapter = adapter
         binding.list.layoutManager = LinearLayoutManager(activity)
     }

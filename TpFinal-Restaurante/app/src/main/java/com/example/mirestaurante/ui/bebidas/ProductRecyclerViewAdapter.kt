@@ -11,7 +11,8 @@ import com.example.mirestaurante.model.Product
 import com.squareup.picasso.Picasso
 
 class ProductRecyclerViewAdapter(
-    private var products: List<Product> = listOf()
+    private var products: List<Product> = listOf(),
+    val itemCallback: (item: Product) -> Unit
 ) : RecyclerView.Adapter<ProductRecyclerViewAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -34,6 +35,10 @@ class ProductRecyclerViewAdapter(
 
         val productImage = product.image ?: R.drawable.no_photo
         Picasso.get().load(productImage).into(holder.itemImage)
+
+        holder.itemView.setOnClickListener {
+            itemCallback(product)
+        }
     }
 
     override fun getItemCount(): Int = products.size
