@@ -1,4 +1,4 @@
-package com.example.mirestaurante.infraestructure.database
+package com.example.mirestaurante.infraestructure.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
