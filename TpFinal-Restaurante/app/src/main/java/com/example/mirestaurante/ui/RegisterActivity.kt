@@ -36,26 +36,60 @@ class RegisterActivity : AppCompatActivity() {
                         disableRegistrationButton()
                         showProgressDialog()
                     }
-                    Thread.sleep(5000)
-                    registerUser()
-                    runOnUiThread {
-                        progressDialog.dismiss()
-                        showSuccessfulUserRegistration()
+
+                    Thread.sleep(3000)
+
+                    if (isUserExists()) {
+                        onUserExists()
+                    } else {
+                        onSuccessfulRegistration()
                     }
                 }
             }
         }
     }
 
+    private fun onSuccessfulRegistration() {
+        registerUser()
+        runOnUiThread {
+            progressDialog.dismiss()
+            showSuccessfulUserRegistrationDialog()
+        }
+    }
+
+    private fun onUserExists() {
+        showUserExistsMessage()
+        enableRegistrationButton()
+        progressDialog.dismiss()
+    }
+
     private fun disableRegistrationButton() {
         binding.registerButton.isEnabled = false
         binding.registerButton.isClickable = false
     }
+
+    private fun enableRegistrationButton() {
+        runOnUiThread {
+            binding.registerButton.isEnabled = true
+            binding.registerButton.isClickable = true
+        }
+    }
+
     private fun showEmptyFieldsMessage() {
         runOnUiThread {
             Toast.makeText(
                 applicationContext,
                 "Por favor complete todos los campos",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun showUserExistsMessage() {
+        runOnUiThread {
+            Toast.makeText(
+                applicationContext,
+                "El mail ya se encuentra registrado en la aplicacion",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -72,6 +106,16 @@ class RegisterActivity : AppCompatActivity() {
                 binding.password.text.toString()
             )
         )
+    }
+
+    private fun authenticateIfExistsUser(email: String): Int {
+        return appBase.getUserDao().checkIfUserIsInDB(email)
+    }
+
+    private fun isUserExists(): Boolean {
+        return authenticateIfExistsUser(
+            binding.email.text.toString(),
+        ) == USER_EXISTS
     }
 
     private fun areThereEmptyFields(): Boolean {
@@ -98,7 +142,7 @@ class RegisterActivity : AppCompatActivity() {
         }.show()
     }
 
-    private fun showSuccessfulUserRegistration() {
+    private fun showSuccessfulUserRegistrationDialog() {
         val alertDialog = AlertDialog.Builder(this)
 
         alertDialog.apply {
@@ -110,5 +154,9 @@ class RegisterActivity : AppCompatActivity() {
                 onBackPressed()
             }
         }.create().show()
+    }
+
+    private companion object {
+        const val USER_EXISTS = 1
     }
 }

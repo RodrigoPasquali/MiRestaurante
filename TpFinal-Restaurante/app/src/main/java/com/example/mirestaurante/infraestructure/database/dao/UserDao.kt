@@ -11,5 +11,8 @@ interface UserDao {
     fun create(user: User)
 
     @Query("select count(*) from user_table where email=:email and password=:password ")
-    fun authenticate(email:String, password:String): Int
+    fun authenticate(email: String, password: String): Int
+
+    @Query("select count(*) from user_table where email=:email")
+    fun checkIfUserIsInDB(email: String): Int
 }
