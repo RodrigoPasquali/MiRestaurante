@@ -2,6 +2,7 @@ package com.example.mirestaurante.ui.bebidas
 
 import ProductRecyclerViewAdapter
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +31,10 @@ class BebidasFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val products = loadProducts()
-        setupAdapter(products)
+        updateState(ProductListState.Loading)
+        Handler().postDelayed ({
+            setupAdapter(products)
+        }, 3000)
     }
 
     private fun loadProducts(): List<Product> {
@@ -54,5 +58,26 @@ class BebidasFragment : Fragment() {
         }
         binding.list.adapter = adapter
         binding.list.layoutManager = LinearLayoutManager(activity)
+        updateState(ProductListState.ReadyProducts())
+    }
+    
+    private fun updateState(state: ProductListState) {
+        when(state) {
+            is ProductListState.Loading -> {
+                binding.loadingBar.visibility = View.VISIBLE
+                binding.list.visibility = View.GONE
+            }
+            is ProductListState.ReadyProducts -> {
+                binding.loadingBar.visibility = View.GONE
+                binding.list.visibility = View.VISIBLE
+            }
+            is ProductListState.EmptyProducts -> {}
+        }
+    }
+
+    private sealed class ProductListState {
+        class ReadyProducts() : ProductListState()
+        class EmptyProducts(val message: String) : ProductListState()
+        object Loading : ProductListState()
     }
 }
