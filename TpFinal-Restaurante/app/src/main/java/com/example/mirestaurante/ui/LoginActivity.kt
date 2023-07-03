@@ -71,7 +71,6 @@ class LoginActivity : AppCompatActivity() {
             enableLoginButtons()
         }
 
-//        startActivity(Intent(this, MenuActivity::class.java))
         startActivity(Intent(this, NavigationDrawerActivity::class.java))
     }
 
@@ -164,7 +163,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private companion object {
-        const val LOGIN_PREFERENCES_KEY = "login_preference_key"
+        const val LOGIN_PREFERENCES_KEY = "login_preference_key_v1"
         const val EMAIL_KEY = "email_key"
         const val PASSWORD_KEY = "password_key"
         const val REMEMBER_KEY = "remember_key"
