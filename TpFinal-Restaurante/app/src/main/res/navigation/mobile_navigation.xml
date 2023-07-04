@@ -31,12 +31,6 @@
         <action
             android:id="@+id/action_nav_bebidas_to_nav_menu_home"
             app:destination="@id/nav_menu_home" />
-        <action
-            android:id="@+id/action_nav_bebidas_to_nav_platos"
-            app:destination="@id/nav_platos" />
-        <action
-            android:id="@+id/action_nav_bebidas_to_nav_map"
-            app:destination="@id/nav_map" />
     </fragment>
 
     <fragment
@@ -47,12 +41,6 @@
         <action
             android:id="@+id/action_nav_platos_to_nav_menu_home"
             app:destination="@id/nav_menu_home" />
-        <action
-            android:id="@+id/action_nav_platos_to_nav_bebidas"
-            app:destination="@id/nav_bebidas" />
-        <action
-            android:id="@+id/action_nav_platos_to_nav_map"
-            app:destination="@id/nav_map" />
     </fragment>
 
     <fragment
@@ -63,11 +51,5 @@
         <action
             android:id="@+id/action_nav_map_to_nav_menu_home"
             app:destination="@id/nav_menu_home" />
-        <action
-            android:id="@+id/action_nav_map_to_nav_bebidas"
-            app:destination="@id/nav_bebidas" />
-        <action
-            android:id="@+id/action_nav_map_to_nav_platos"
-            app:destination="@id/nav_platos" />
     </fragment>
 </navigation>

@@ -32,7 +32,7 @@ class NavigationDrawerActivity : AppCompatActivity() {
         //Con esto doy la posibilidad de dejar el menu de hamburguesa en los fragmentos, o quitarlo
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_menu_home, R.id.nav_bebidas, R.id.nav_platos, R.id.nav_map
+                R.id.nav_menu_home, R.id.nav_map
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

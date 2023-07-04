@@ -9,14 +9,6 @@
             android:icon="@drawable/menu_book_icon"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_bebidas"
-            android:icon="@drawable/bottle_wine_icon"
-            android:title="@string/menu_bebidas" />
-        <item
-            android:id="@+id/nav_platos"
-            android:icon="@drawable/knife_and_fork_icon"
-            android:title="@string/menu_platos" />
-        <item
             android:id="@+id/nav_map"
             android:icon="@drawable/map_icon"
             android:title="@string/menu_map" />
