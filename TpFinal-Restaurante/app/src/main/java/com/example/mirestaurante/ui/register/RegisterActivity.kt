@@ -1,60 +1,83 @@
-package com.example.mirestaurante.ui
+package com.example.mirestaurante.ui.register
 
 import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.ViewModelProvider
 import com.example.mirestaurante.R
 import com.example.mirestaurante.databinding.ActivityRegisterBinding
-import com.example.mirestaurante.infraestructure.database.AppDataBase
+import com.example.mirestaurante.di.Injection
 import com.example.mirestaurante.model.User
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var progressDialog: ProgressDialog
-    private val appBase by lazy { AppDataBase.getInstance(this) }
+    private lateinit var registerViewModel: RegisterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        registerViewModel =
+            ViewModelProvider(
+                this,
+                RegisterViewModelFactory(Injection.provideAppDataBase(applicationContext))
+            ).get(RegisterViewModel::class.java)
+
+        observers()
         onRegisterButtonClick()
     }
 
-    private fun onRegisterButtonClick() {
-        binding.registerButton.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO) {
-                if (areThereEmptyFields()) {
-                    showEmptyFieldsMessage()
-                } else {
-                    runOnUiThread {
-                        disableRegistrationButton()
-                        showProgressDialog()
-                    }
+    private fun observers() {
+        observeIsThereAnEmptyField()
+        observeUserExists()
+        observeUserRegisterSuccess()
+    }
 
-                    Thread.sleep(3000)
-
-                    if (isUserExists()) {
-                        onUserExists()
-                    } else {
-                        onSuccessfulRegistration()
-                    }
-                }
+    private fun observeUserExists() {
+        registerViewModel.isUserExists.observe(this) { userExists ->
+            if (userExists) {
+                onUserExists()
+            } else {
+                registerUser()
+            }
+        }
+    }   
+    
+    private fun observeUserRegisterSuccess() {
+        registerViewModel.registerUserSucceess.observe(this) { registrationSuccess ->
+            if (registrationSuccess) {
+                onSuccessfulRegistration()
             }
         }
     }
 
-    private fun onSuccessfulRegistration() {
-        registerUser()
-        runOnUiThread {
-            progressDialog.dismiss()
-            showSuccessfulUserRegistrationDialog()
+    private fun observeIsThereAnEmptyField() {
+        registerViewModel.isThereAnEmptyField?.observe(this) { emptyFields ->
+            if (emptyFields) {
+                showEmptyFieldsMessage()
+            } else {
+                onAllFieldsComplete()
+            }
         }
+    }
+
+    private fun onRegisterButtonClick() {
+        binding.registerButton.setOnClickListener {
+            setIsThereAnEmptyField()
+        }
+    }
+
+    private fun setIsThereAnEmptyField() {
+        registerViewModel.setIsThereAnEmptyField(areThereEmptyFields())
+    }
+
+    private fun onSuccessfulRegistration() {
+        progressDialog.dismiss()
+        showSuccessfulUserRegistrationDialog()
     }
 
     private fun onUserExists() {
@@ -69,67 +92,49 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun enableRegistrationButton() {
-        runOnUiThread {
-            binding.registerButton.isEnabled = true
-            binding.registerButton.isClickable = true
-        }
+        binding.registerButton.isEnabled = true
+        binding.registerButton.isClickable = true
+    }
+
+    private fun onAllFieldsComplete(){
+        registerViewModel.setIsUserExists(binding.email.text.toString())
+        disableRegistrationButton()
+        showProgressDialog()
     }
 
     private fun showEmptyFieldsMessage() {
-        runOnUiThread {
-            Toast.makeText(
-                applicationContext,
-                "Por favor complete todos los campos",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+        Toast.makeText(
+            applicationContext,
+            "Por favor complete todos los campos",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun showUserExistsMessage() {
-        runOnUiThread {
-            Toast.makeText(
-                applicationContext,
-                "El mail ya se encuentra registrado en la aplicacion",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+        Toast.makeText(
+            applicationContext,
+            "El mail ya se encuentra registrado en la aplicacion",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun registerUser() {
-        appBase.getUserDao().create(
+        registerViewModel.registerUser(
             User(
                 binding.name.text.toString(),
                 binding.lastname.text.toString(),
                 binding.streetName.text.toString(),
-                getStreetNumber(binding.streetNumber.text.toString()),
+                binding.streetNumber.text.toString().toInt(),
                 binding.email.text.toString(),
                 binding.password.text.toString()
             )
         )
     }
 
-    private fun authenticateIfExistsUser(email: String): Int {
-        return appBase.getUserDao().checkIfUserIsInDB(email)
-    }
-
-    private fun isUserExists(): Boolean {
-        return authenticateIfExistsUser(
-            binding.email.text.toString(),
-        ) == USER_EXISTS
-    }
-
     private fun areThereEmptyFields(): Boolean {
         return binding.name.toString().isEmpty() || binding.lastname.text.isEmpty()
                 || binding.streetName.text.isEmpty() || binding.streetNumber.text.isEmpty()
                 || binding.email.text.isEmpty() || binding.password.text.isEmpty()
-    }
-
-    private fun getStreetNumber(number: String): Int {
-        return if (number.isNotEmpty()) {
-            number.toInt()
-        } else {
-            0
-        }
     }
 
     private fun showProgressDialog() {
@@ -154,9 +159,5 @@ class RegisterActivity : AppCompatActivity() {
                 onBackPressed()
             }
         }.create().show()
-    }
-
-    private companion object {
-        const val USER_EXISTS = 1
     }
 }

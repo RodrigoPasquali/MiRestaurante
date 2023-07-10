@@ -12,6 +12,7 @@ import androidx.security.crypto.MasterKeys
 import com.example.mirestaurante.R
 import com.example.mirestaurante.databinding.ActivityLoginBinding
 import com.example.mirestaurante.infraestructure.database.AppDataBase
+import com.example.mirestaurante.ui.register.RegisterActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

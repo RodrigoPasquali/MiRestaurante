@@ -16,7 +16,7 @@
             android:label="@string/title_activity_navigation_drawer"
             android:theme="@style/Theme.MaterialComponents.NoActionBar.Bridge" />
         <activity
-            android:name=".ui.RegisterActivity"
+            android:name=".ui.register.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".ui.LoginActivity"
