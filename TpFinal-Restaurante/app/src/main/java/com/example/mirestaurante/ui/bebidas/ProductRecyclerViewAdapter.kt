@@ -40,6 +40,11 @@ class ProductRecyclerViewAdapter(
         }
     }
 
+    fun updateProducts(productsReceiver: MutableList<Product>) {
+        products = productsReceiver
+        notifyDataSetChanged()
+    }
+
     private fun getProductImage(product: Product): Int {
         return product.image ?: R.drawable.no_photo
     }

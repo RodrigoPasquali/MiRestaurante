@@ -3,11 +3,30 @@ package com.example.mirestaurante.ui.bebidas
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.mirestaurante.infraestructure.database.AppDataBase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class BebidasViewModel : ViewModel() {
+class BebidasViewModel(
+    private val appDataBase: AppDataBase
+) : ViewModel() {
+    private var _productState = MutableLiveData<ProductsState>()
+    var productState: LiveData<ProductsState> = _productState
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is bebidas Fragment"
+    fun loadProducts() {
+        viewModelScope.launch(Dispatchers.IO) {
+            loading()
+            Thread.sleep(3000)
+            _productState.postValue(
+                ProductsState.ReadyProducts(
+                    appDataBase.getProductDao().getProducts()
+                )
+            )
+        }
     }
-    val text: LiveData<String> = _text
+
+    private fun loading() {
+        _productState.postValue(ProductsState.Loading)
+    }
 }
