@@ -21,7 +21,7 @@ class EncryptedSharedPreferencesManager {
         val sharedPreferences = getSharedPreferencesLogin(context)
 
         return LoginUser(
-            sharedPreferences.getString(EMAIL_KEY, ""),
+            sharedPreferences.getString(EMAIL_KEY, "").toString(),
             sharedPreferences.getString(PASSWORD_KEY, "").toString(),
             sharedPreferences.getBoolean(
                 REMEMBER_KEY,

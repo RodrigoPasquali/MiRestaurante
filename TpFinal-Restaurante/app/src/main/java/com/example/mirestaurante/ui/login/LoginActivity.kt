@@ -16,7 +16,7 @@ import com.example.mirestaurante.ui.register.RegisterActivity
 @Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
-    private lateinit var progressDialog: ProgressDialog
+    private val progressDialog by lazy { ProgressDialog(this) }
     private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,8 +40,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun observers() {
-        observeUserAuthentication()
         observeLoginUser()
+        observeLoginStatus()
     }
 
     private fun observeLoginUser() {
@@ -52,58 +52,60 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeUserAuthentication() {
-        loginViewModel.userAuthentication.observe(this) { credentialExists ->
-            if (credentialExists) {
-                onMatchingCredentialFound()
-            } else {
-                onMatchingCredentialNotFound()
-            }
-        }
-    }
-
     private fun onGetLoginUser() {
         loginViewModel.getLoginUser(this)
     }
 
-    private fun onEnterButtonClick() {
-        binding.loginButton.setOnClickListener {
-            authenticateUserCredential()
-            disableLoginButtons()
-            showProgressDialog()
+    private fun observeLoginStatus() {
+        loginViewModel.loginStatus.observe(this) {
+            updateLoginStatus(it)
         }
     }
 
-    private fun onMatchingCredentialFound() {
-        loginViewModel.rememberUser(
-            LoginUser(
-                binding.email.text.toString(),
-                binding.password.text.toString(),
-                binding.rememberUserCheckbox.isChecked
-            ),
-            this
-        )
+    private fun updateLoginStatus(loginStatus: LoginStatus) {
+        when (loginStatus) {
+            LoginStatus.AuthenticatingCredentials -> {
+                onAuthenticatingCredentials()
+            }
 
-        progressDialog.dismiss()
-        enableLoginButtons()
+            LoginStatus.SuccessfulLogin -> {
+                onSuccessfulLogin()
+            }
 
-        startActivity(Intent(this, NavigationDrawerActivity::class.java))
+            LoginStatus.FailedLogin -> {
+                onFailedLogin()
+            }
+        }
     }
 
+    private fun onAuthenticatingCredentials() {
+        showProgressDialog()
+        disableLoginButtons()
+    }
 
-    private fun onMatchingCredentialNotFound() {
+    private fun onSuccessfulLogin() {
         progressDialog.dismiss()
         enableLoginButtons()
 
+        navigateToMenu()
+    }
+
+    private fun onFailedLogin() {
+        progressDialog.dismiss()
+        enableLoginButtons()
+
+        showInvalidCredentials()
+    }
+
+    private fun showInvalidCredentials() {
         Toast.makeText(
             applicationContext,
-            "Credenciales incorrectas",
+            getString(R.string.invalid_credentials),
             Toast.LENGTH_SHORT
         ).show()
     }
 
     private fun showProgressDialog() {
-        progressDialog = ProgressDialog(this)
         progressDialog.apply {
             setTitle(getString(R.string.login))
             setMessage(getString(R.string.user_authenticator_message))
@@ -126,16 +128,30 @@ class LoginActivity : AppCompatActivity() {
         binding.loginButton.isClickable = true
     }
 
-    private fun authenticateUserCredential() {
-        loginViewModel.authenticateUser(
-            binding.email.text.toString(),
-            binding.password.text.toString()
-        )
+    private fun onEnterButtonClick() {
+        binding.loginButton.setOnClickListener {
+            loginViewModel.onTryToLogin(
+                LoginUser(
+                    binding.email.text.toString(),
+                    binding.password.text.toString(),
+                    binding.rememberUserCheckbox.isChecked
+                ),
+                this
+            )
+        }
     }
 
     private fun onRegisterButtonClick() {
         binding.registerButton.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
+            navigateToRegistration()
         }
+    }
+
+    private fun navigateToMenu() {
+        startActivity(Intent(this, NavigationDrawerActivity::class.java))
+    }
+
+    private fun navigateToRegistration() {
+        startActivity(Intent(this, RegisterActivity::class.java))
     }
 }

@@ -15,21 +15,44 @@ class LoginViewModel(
     private val appDataBase: AppDataBase,
     private val sharedPreferences: EncryptedSharedPreferencesManager
 ) : ViewModel() {
-    private var _userAuthentication = MutableLiveData<Boolean>()
-    var userAuthentication: LiveData<Boolean> = _userAuthentication
     private var _loginUser = MutableLiveData<LoginUser>()
     var loginUser: LiveData<LoginUser> = _loginUser
 
-    fun authenticateUser(email: String, password: String) {
+    private var _loginStatus = MutableLiveData<LoginStatus>()
+    var loginStatus: LiveData<LoginStatus> = _loginStatus
+
+    fun getLoginUser(context: Context) {
+        _loginUser.postValue(sharedPreferences.getLoginUser(context))
+    }
+
+    fun onTryToLogin(loginUser: LoginUser, context: Context) {
+        _loginStatus.postValue(LoginStatus.AuthenticatingCredentials)
+
         viewModelScope.launch(Dispatchers.IO) {
             Thread.sleep(3000)
-            _userAuthentication.postValue(
-                appDataBase.getUserDao().authenticate(email, password) == USER_EXISTS
-            )
+            if (authenticateUser(loginUser)) {
+                onSuccessfulLogin(loginUser, context)
+            } else {
+                onFailureLogin()
+            }
         }
     }
 
-    fun rememberUser(loginUser: LoginUser, context: Context) {
+    private fun authenticateUser(loginUser: LoginUser): Boolean {
+        return appDataBase.getUserDao()
+            .authenticate(loginUser.email, loginUser.password) == USER_EXISTS
+    }
+
+    private fun onSuccessfulLogin(loginUser: LoginUser, context: Context) {
+        rememberUser(loginUser, context)
+        _loginStatus.postValue(LoginStatus.SuccessfulLogin)
+    }
+
+    private fun onFailureLogin() {
+        _loginStatus.postValue(LoginStatus.FailedLogin)
+    }
+
+    private fun rememberUser(loginUser: LoginUser, context: Context) {
         if (loginUser.remember) {
             saveUserLogin(loginUser, context)
         } else {
@@ -43,10 +66,6 @@ class LoginViewModel(
 
     private fun clearUserLogin(context: Context) {
         sharedPreferences.clearUserLogin(context)
-    }
-
-    fun getLoginUser(context: Context) {
-        _loginUser.postValue(sharedPreferences.getLoginUser(context))
     }
 
     private companion object {
