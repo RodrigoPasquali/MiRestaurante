@@ -69,18 +69,28 @@ class BebidasFragment : Fragment() {
                 onReadyProducts(state.products)
             }
 
-            is ProductsState.EmptyProducts -> {}
+            is ProductsState.Error -> {
+                onError(state.message)
+            }
         }
     }
 
     private fun onLoading() {
         binding.loadingBar.visibility = View.VISIBLE
         binding.list.visibility = View.GONE
+        binding.errorContainer.visibility = View.GONE
     }
 
     private fun onReadyProducts(products: MutableList<Product>) {
+        binding.list.visibility = View.VISIBLE
         adapter.updateProducts(products)
         binding.loadingBar.visibility = View.GONE
-        binding.list.visibility = View.VISIBLE
+        binding.errorContainer.visibility = View.GONE
+    }
+    private fun onError(message: String) {
+        binding.loadingBar.visibility = View.GONE
+        binding.list.visibility = View.GONE
+        binding.errorContainer.visibility = View.VISIBLE
+        binding.errorTexto.text = message
     }
 }
