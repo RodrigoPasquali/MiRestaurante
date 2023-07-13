@@ -11,8 +11,8 @@ import kotlinx.coroutines.launch
 class BebidasViewModel(
     private val appDataBase: AppDataBase
 ) : ViewModel() {
-    private var _productState = MutableLiveData<ProductsState>()
-    var productState: LiveData<ProductsState> = _productState
+    private var _productStatus = MutableLiveData<ProductsStatus>()
+    var productStatus: LiveData<ProductsStatus> = _productStatus
 
     fun loadProducts() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -36,23 +36,23 @@ class BebidasViewModel(
     }
 
     private fun onReadyProducts() {
-        _productState.postValue(
-            ProductsState.ReadyProducts(
+        _productStatus.postValue(
+            ProductsStatus.ReadyProducts(
                 appDataBase.getProductDao().getProducts()
             )
         )
     }
 
     private fun onConnectionError() {
-        _productState.postValue(ProductsState.Error("Problemas con la conexion de internet"))
+        _productStatus.postValue(ProductsStatus.Error("Problemas con la conexion de internet"))
     }
 
     private fun onInternalError(){
-        _productState.postValue(ProductsState.Error("Problemas internos, disculpe las molestas"))
+        _productStatus.postValue(ProductsStatus.Error("Problemas internos, disculpe las molestas"))
     }
 
     private fun loading() {
-        _productState.postValue(ProductsState.Loading)
+        _productStatus.postValue(ProductsStatus.Loading)
     }
 
     private companion object {

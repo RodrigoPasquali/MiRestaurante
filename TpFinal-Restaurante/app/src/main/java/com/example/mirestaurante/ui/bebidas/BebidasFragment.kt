@@ -44,8 +44,8 @@ class BebidasFragment : Fragment() {
     }
 
     private fun observers() {
-        bebidasViewModel.productState.observe(viewLifecycleOwner) {
-            updateState(it)
+        bebidasViewModel.productStatus.observe(viewLifecycleOwner) {
+            updateStatus(it)
         }
     }
 
@@ -59,18 +59,18 @@ class BebidasFragment : Fragment() {
         binding.list.layoutManager = LinearLayoutManager(activity)
     }
 
-    private fun updateState(state: ProductsState) {
-        when (state) {
-            is ProductsState.Loading -> {
+    private fun updateStatus(status: ProductsStatus) {
+        when (status) {
+            is ProductsStatus.Loading -> {
                 onLoading()
             }
 
-            is ProductsState.ReadyProducts -> {
-                onReadyProducts(state.products)
+            is ProductsStatus.ReadyProducts -> {
+                onReadyProducts(status.products)
             }
 
-            is ProductsState.Error -> {
-                onError(state.message)
+            is ProductsStatus.Error -> {
+                onError(status.message)
             }
         }
     }
