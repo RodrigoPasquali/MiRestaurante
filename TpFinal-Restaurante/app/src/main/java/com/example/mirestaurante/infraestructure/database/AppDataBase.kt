@@ -27,7 +27,7 @@ abstract class AppDataBase : RoomDatabase() {
 
         fun getInstance(context: Context): AppDataBase {
             if (instance == null) {
-                instance = Room.databaseBuilder(context, AppDataBase::class.java, "RestauranteDB")
+                instance = Room.databaseBuilder(context, AppDataBase::class.java, "RestauranteDB1")
                     .addCallback(object : Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
