@@ -12,38 +12,35 @@ import kotlinx.coroutines.launch
 class RegisterViewModel(
     private val appDataBase: AppDataBase
 ) : ViewModel() {
-    private var _isThereAnEmptyField = MutableLiveData<Boolean>()
-    var isThereAnEmptyField: LiveData<Boolean>? = _isThereAnEmptyField
-    private var _isUserExists: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
-    var isUserExists: LiveData<Boolean> = _isUserExists
-    private var _registerUserSucceess: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
-    var registerUserSucceess: LiveData<Boolean> = _registerUserSucceess
+    private var _registerStatus = MutableLiveData<RegisterStatus>()
+    var registerStatus: LiveData<RegisterStatus> = _registerStatus
 
-    fun setIsThereAnEmptyField(value: Boolean) {
-        _isThereAnEmptyField.value = value
-    }
-
-    fun setIsUserExists(email: String) {
-        authenticateIfExistsUser(email)
-    }
-
-    private fun authenticateIfExistsUser(email: String) {
+    fun tryRegisterUser(user: User) {
+        _registerStatus.postValue(RegisterStatus.Loading)
         viewModelScope.launch(Dispatchers.IO) {
             Thread.sleep(3000)
-            _isUserExists.postValue(
-                appDataBase.getUserDao().checkIfUserIsInDB(email) == USER_EXISTS
-            )
+            if (!checkIfExistsUser(user.email)) {
+                registerUser(user)
+            } else {
+                onUserExist()
+            }
         }
     }
 
-    fun registerUser(user: User) {
-        viewModelScope.launch(Dispatchers.IO) {
-            appDataBase.getUserDao().create(
-                user
-            )
-        }
+    private fun checkIfExistsUser(email: String): Boolean {
+        return appDataBase.getUserDao().checkIfUserIsInDB(email) == USER_EXISTS
+    }
 
-        _registerUserSucceess.postValue(true)
+    private fun registerUser(user: User) {
+        appDataBase.getUserDao().create(
+            user
+        )
+
+        _registerStatus.postValue(RegisterStatus.SuccessfulRegistration)
+    }
+
+    private fun onUserExist() {
+        _registerStatus.postValue(RegisterStatus.FailedRegistration)
     }
 
     private companion object {

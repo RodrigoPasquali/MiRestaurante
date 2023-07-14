@@ -32,47 +32,49 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun observers() {
-        observeIsThereAnEmptyField()
-        observeUserExists()
-        observeUserRegisterSuccess()
+        observeRegisterStatus()
     }
 
-    private fun observeUserExists() {
-        registerViewModel.isUserExists.observe(this) { userExists ->
-            if (userExists) {
-                onUserExists()
-            } else {
-                registerUser()
-            }
+    private fun observeRegisterStatus() {
+        registerViewModel.registerStatus.observe(this) {
+            updateRegistrationStatus(it)
         }
-    }   
-    
-    private fun observeUserRegisterSuccess() {
-        registerViewModel.registerUserSucceess.observe(this) { registrationSuccess ->
-            if (registrationSuccess) {
+    }
+
+    private fun updateRegistrationStatus(status: RegisterStatus) {
+        when (status) {
+            RegisterStatus.SuccessfulRegistration -> {
                 onSuccessfulRegistration()
             }
-        }
-    }
-
-    private fun observeIsThereAnEmptyField() {
-        registerViewModel.isThereAnEmptyField?.observe(this) { emptyFields ->
-            if (emptyFields) {
-                showEmptyFieldsMessage()
-            } else {
-                onAllFieldsComplete()
+            RegisterStatus.FailedRegistration -> {
+                onUserExists()
+            }
+            RegisterStatus.Loading -> {
+                loading()
             }
         }
     }
 
-    private fun onRegisterButtonClick() {
-        binding.registerButton.setOnClickListener {
-            setIsThereAnEmptyField()
+    private fun onRegisterUser() {
+        if (!areThereEmptyFields()) {
+            registerViewModel.tryRegisterUser(
+                User(
+                    binding.name.text.toString(),
+                    binding.lastname.text.toString(),
+                    binding.streetName.text.toString(),
+                    binding.streetNumber.text.toString().toInt(),
+                    binding.email.text.toString(),
+                    binding.password.text.toString()
+                )
+            )
+        } else {
+            showEmptyFieldsMessage()
         }
     }
 
-    private fun setIsThereAnEmptyField() {
-        registerViewModel.setIsThereAnEmptyField(areThereEmptyFields())
+    private fun loading() {
+        disableRegistrationButton()
+        showProgressDialog()
     }
 
     private fun onSuccessfulRegistration() {
@@ -96,12 +98,6 @@ class RegisterActivity : AppCompatActivity() {
         binding.registerButton.isClickable = true
     }
 
-    private fun onAllFieldsComplete(){
-        registerViewModel.setIsUserExists(binding.email.text.toString())
-        disableRegistrationButton()
-        showProgressDialog()
-    }
-
     private fun showEmptyFieldsMessage() {
         Toast.makeText(
             applicationContext,
@@ -116,19 +112,6 @@ class RegisterActivity : AppCompatActivity() {
             "El mail ya se encuentra registrado en la aplicacion",
             Toast.LENGTH_SHORT
         ).show()
-    }
-
-    private fun registerUser() {
-        registerViewModel.registerUser(
-            User(
-                binding.name.text.toString(),
-                binding.lastname.text.toString(),
-                binding.streetName.text.toString(),
-                binding.streetNumber.text.toString().toInt(),
-                binding.email.text.toString(),
-                binding.password.text.toString()
-            )
-        )
     }
 
     private fun areThereEmptyFields(): Boolean {
@@ -159,5 +142,11 @@ class RegisterActivity : AppCompatActivity() {
                 onBackPressed()
             }
         }.create().show()
+    }
+
+    private fun onRegisterButtonClick() {
+        binding.registerButton.setOnClickListener {
+            onRegisterUser()
+        }
     }
 }
