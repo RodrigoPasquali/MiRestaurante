@@ -6,13 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mirestaurante.infraestructure.EncryptedSharedPreferencesManager
-import com.example.mirestaurante.infraestructure.database.AppDataBase
 import com.example.mirestaurante.domain.LoginUser
+import com.example.mirestaurante.domain.repositories.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val appDataBase: AppDataBase,
+    private val repository: UserRepository,
     private val sharedPreferences: EncryptedSharedPreferencesManager
 ) : ViewModel() {
     private var _loginUser = MutableLiveData<LoginUser>()
@@ -38,9 +38,8 @@ class LoginViewModel(
         }
     }
 
-    private fun authenticateUser(loginUser: LoginUser): Boolean {
-        return appDataBase.getUserDao()
-            .authenticate(loginUser.email, loginUser.password) == USER_EXISTS
+    private suspend fun authenticateUser(loginUser: LoginUser): Boolean {
+        return repository.authenticate(loginUser.email, loginUser.password) == USER_EXISTS
     }
 
     private fun onSuccessfulLogin(loginUser: LoginUser, context: Context) {
