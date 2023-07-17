@@ -1,6 +1,6 @@
 package com.example.mirestaurante.ui.bebidas
 
-import com.example.mirestaurante.model.Product
+import com.example.mirestaurante.domain.Product
 
 sealed class ProductsStatus {
     class ReadyProducts(val products: MutableList<Product>) : ProductsStatus()

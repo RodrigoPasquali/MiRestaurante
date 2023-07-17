@@ -5,11 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.mirestaurante.BebidasListDummy
+import com.example.mirestaurante.ui.bebidas.BebidasListDummy
 import com.example.mirestaurante.infraestructure.database.dao.ProductDao
 import com.example.mirestaurante.infraestructure.database.dao.UserDao
-import com.example.mirestaurante.model.Product
-import com.example.mirestaurante.model.User
+import com.example.mirestaurante.domain.Product
+import com.example.mirestaurante.domain.User
 import java.util.concurrent.Executors
 
 @Database(

@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
-import com.example.mirestaurante.model.LoginUser
+import com.example.mirestaurante.domain.LoginUser
 
 class EncryptedSharedPreferencesManager {
     fun saveUserLogin(loginUser: LoginUser, context: Context) {

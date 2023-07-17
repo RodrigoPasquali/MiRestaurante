@@ -1,6 +1,7 @@
-package com.example.mirestaurante
+package com.example.mirestaurante.ui.bebidas
 
-import com.example.mirestaurante.model.Product
+import com.example.mirestaurante.R
+import com.example.mirestaurante.domain.Product
 
 object BebidasListDummy {
     fun getBebidas(): MutableList<Product> {

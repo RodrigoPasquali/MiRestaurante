@@ -3,7 +3,7 @@ package com.example.mirestaurante.infraestructure.database.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.mirestaurante.model.User
+import com.example.mirestaurante.domain.User
 
 @Dao
 interface UserDao {

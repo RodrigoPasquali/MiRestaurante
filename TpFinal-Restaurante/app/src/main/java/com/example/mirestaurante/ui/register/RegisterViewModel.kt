@@ -5,12 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mirestaurante.infraestructure.database.AppDataBase
-import com.example.mirestaurante.model.User
+import com.example.mirestaurante.infraestructure.repository.UserRepositoryRoom
+import com.example.mirestaurante.domain.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(
-    private val appDataBase: AppDataBase
+    private val appDataBase: AppDataBase,
+    private val userRepository: UserRepositoryRoom
 ) : ViewModel() {
     private var _registerStatus = MutableLiveData<RegisterStatus>()
     var registerStatus: LiveData<RegisterStatus> = _registerStatus
@@ -31,10 +33,11 @@ class RegisterViewModel(
         return appDataBase.getUserDao().checkIfUserIsInDB(email) == USER_EXISTS
     }
 
-    private fun registerUser(user: User) {
-        appDataBase.getUserDao().create(
-            user
-        )
+    private suspend fun registerUser(user: User) {
+        userRepository.create(user)
+//        appDataBase.getUserDao().create(
+//            user
+//        )
 
         _registerStatus.postValue(RegisterStatus.SuccessfulRegistration)
     }
