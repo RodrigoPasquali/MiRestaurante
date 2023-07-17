@@ -2,12 +2,12 @@ package com.example.mirestaurante.ui.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.mirestaurante.infraestructure.database.AppDataBase
+import com.example.mirestaurante.domain.repositories.UserRepository
 
 class RegisterViewModelFactory(
-    private val appDataBase: AppDataBase
+    private val repository: UserRepository
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return RegisterViewModel(appDataBase) as T
+        return RegisterViewModel(repository) as T
     }
 }
