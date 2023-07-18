@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mirestaurante.infraestructure.database.AppDataBase
+import com.example.mirestaurante.domain.repository.ProductRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class BebidasViewModel(
-    private val appDataBase: AppDataBase
+    private val repository: ProductRepository
 ) : ViewModel() {
     private var _productStatus = MutableLiveData<ProductsStatus>()
     var productStatus: LiveData<ProductsStatus> = _productStatus
@@ -35,10 +35,10 @@ class BebidasViewModel(
         }
     }
 
-    private fun onReadyProducts() {
+    private suspend fun onReadyProducts() {
         _productStatus.postValue(
             ProductsStatus.ReadyProducts(
-                appDataBase.getProductDao().getProducts()
+                repository.getProducts()
             )
         )
     }
