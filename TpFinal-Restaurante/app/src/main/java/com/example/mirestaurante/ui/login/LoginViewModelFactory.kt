@@ -2,7 +2,7 @@ package com.example.mirestaurante.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.mirestaurante.domain.repositories.UserRepository
+import com.example.mirestaurante.domain.repository.UserRepository
 import com.example.mirestaurante.infraestructure.EncryptedSharedPreferencesManager
 
 class LoginViewModelFactory(

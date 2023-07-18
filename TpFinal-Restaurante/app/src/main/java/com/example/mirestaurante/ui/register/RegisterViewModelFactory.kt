@@ -2,7 +2,7 @@ package com.example.mirestaurante.ui.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.mirestaurante.domain.repositories.UserRepository
+import com.example.mirestaurante.domain.repository.UserRepository
 
 class RegisterViewModelFactory(
     private val repository: UserRepository

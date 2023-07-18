@@ -2,7 +2,7 @@ package com.example.mirestaurante.infraestructure.repository
 
 import com.example.mirestaurante.infraestructure.database.AppDataBase
 import com.example.mirestaurante.domain.User
-import com.example.mirestaurante.domain.repositories.UserRepository
+import com.example.mirestaurante.domain.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

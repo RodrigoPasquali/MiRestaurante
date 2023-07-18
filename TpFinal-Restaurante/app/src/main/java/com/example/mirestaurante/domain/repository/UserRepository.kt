@@ -1,4 +1,4 @@
-package com.example.mirestaurante.domain.repositories
+package com.example.mirestaurante.domain.repository
 
 import com.example.mirestaurante.domain.User
 
