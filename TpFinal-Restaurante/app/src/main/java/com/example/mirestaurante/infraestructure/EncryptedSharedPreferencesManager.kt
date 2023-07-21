@@ -57,9 +57,9 @@ class EncryptedSharedPreferencesManager {
                 instance ?: EncryptedSharedPreferencesManager().also { instance = it }
             }
 
-        private const val LOGIN_PREFERENCES_KEY = "login_preference_key_v3"
-        private const val EMAIL_KEY = "email_key"
-        private const val PASSWORD_KEY = "password_key"
-        private const val REMEMBER_KEY = "remember_key"
+        private const val LOGIN_PREFERENCES_KEY = "com.example.mirestaurante"
+        private const val EMAIL_KEY = "$LOGIN_PREFERENCES_KEY.email_key"
+        private const val PASSWORD_KEY = "$LOGIN_PREFERENCES_KEY.password_key"
+        private const val REMEMBER_KEY = "$LOGIN_PREFERENCES_KEY.remember_key"
     }
 }
