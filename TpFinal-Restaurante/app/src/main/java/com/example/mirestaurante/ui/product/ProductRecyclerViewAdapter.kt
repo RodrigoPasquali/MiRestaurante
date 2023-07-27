@@ -7,7 +7,7 @@ import android.widget.TextView
 import com.example.mirestaurante.R
 import com.example.mirestaurante.databinding.ItemProductBinding
 
-import com.example.mirestaurante.domain.Product
+import com.example.mirestaurante.domain.model.Product
 import com.squareup.picasso.Picasso
 
 class ProductRecyclerViewAdapter(

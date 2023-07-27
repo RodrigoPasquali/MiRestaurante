@@ -1,6 +1,6 @@
 package com.example.mirestaurante.domain.repository
 
-import com.example.mirestaurante.domain.User
+import com.example.mirestaurante.domain.model.User
 
 interface UserRepository {
     suspend fun create(user: User)

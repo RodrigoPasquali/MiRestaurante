@@ -1,4 +1,4 @@
-package com.example.mirestaurante.domain
+package com.example.mirestaurante.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

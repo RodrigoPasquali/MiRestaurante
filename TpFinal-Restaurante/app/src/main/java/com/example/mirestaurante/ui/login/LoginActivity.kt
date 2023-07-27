@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.mirestaurante.R
 import com.example.mirestaurante.databinding.ActivityLoginBinding
 import com.example.mirestaurante.di.Injection
-import com.example.mirestaurante.domain.LoginUser
+import com.example.mirestaurante.domain.model.LoginUser
 import com.example.mirestaurante.ui.NavigationDrawerActivity
 import com.example.mirestaurante.ui.register.RegisterActivity
 

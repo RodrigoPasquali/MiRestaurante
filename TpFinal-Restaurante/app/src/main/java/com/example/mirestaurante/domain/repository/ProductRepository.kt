@@ -1,6 +1,6 @@
 package com.example.mirestaurante.domain.repository
 
-import com.example.mirestaurante.domain.Product
+import com.example.mirestaurante.domain.model.Product
 
 interface ProductRepository {
     suspend fun insert(product: Product)

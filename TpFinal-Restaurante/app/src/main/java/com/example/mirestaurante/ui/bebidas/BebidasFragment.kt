@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mirestaurante.databinding.FragmentBebidasBinding
 import com.example.mirestaurante.di.Injection
-import com.example.mirestaurante.domain.Product
+import com.example.mirestaurante.domain.model.Product
 import com.example.mirestaurante.ui.product.ProductsStatus
 
 class BebidasFragment : Fragment() {

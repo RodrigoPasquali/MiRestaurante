@@ -1,7 +1,7 @@
 package com.example.mirestaurante.ui.platos
 
 import com.example.mirestaurante.R
-import com.example.mirestaurante.domain.Product
+import com.example.mirestaurante.domain.model.Product
 import com.example.mirestaurante.ui.product.ProductCategory
 
 object PlatosListDummy {

@@ -1,6 +1,6 @@
 package com.example.mirestaurante.infraestructure.repository
 
-import com.example.mirestaurante.domain.Product
+import com.example.mirestaurante.domain.model.Product
 import com.example.mirestaurante.domain.repository.ProductRepository
 import com.example.mirestaurante.infraestructure.database.AppDataBase
 import kotlinx.coroutines.Dispatchers

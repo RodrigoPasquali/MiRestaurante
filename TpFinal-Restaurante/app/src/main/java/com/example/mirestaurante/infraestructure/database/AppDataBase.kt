@@ -8,8 +8,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.mirestaurante.ui.bebidas.BebidasListDummy
 import com.example.mirestaurante.infraestructure.database.dao.ProductDao
 import com.example.mirestaurante.infraestructure.database.dao.UserDao
-import com.example.mirestaurante.domain.Product
-import com.example.mirestaurante.domain.User
+import com.example.mirestaurante.domain.model.Product
+import com.example.mirestaurante.domain.model.User
 import com.example.mirestaurante.ui.platos.PlatosListDummy
 import java.util.concurrent.Executors
 
