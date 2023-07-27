@@ -1,6 +1,6 @@
 package com.example.mirestaurante.ui.bebidas
 
-import ProductRecyclerViewAdapter
+import com.example.mirestaurante.ui.product.ProductRecyclerViewAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mirestaurante.databinding.FragmentBebidasBinding
 import com.example.mirestaurante.di.Injection
 import com.example.mirestaurante.domain.Product
+import com.example.mirestaurante.ui.product.ProductsStatus
 
 class BebidasFragment : Fragment() {
     private lateinit var binding: FragmentBebidasBinding

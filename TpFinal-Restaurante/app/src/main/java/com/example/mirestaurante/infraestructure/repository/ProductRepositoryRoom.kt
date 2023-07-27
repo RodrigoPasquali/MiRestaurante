@@ -26,4 +26,16 @@ class ProductRepositoryRoom(database: AppDataBase): ProductRepository {
             productDao.getProducts()
         }
     }
+
+    override suspend fun getPlatos(): MutableList<Product> {
+        return withContext(Dispatchers.IO) {
+            productDao.getPlatos()
+        }
+    }
+
+    override suspend fun getBebidas(): MutableList<Product> {
+        return withContext(Dispatchers.IO) {
+            productDao.getBebidas()
+        }
+    }
 }

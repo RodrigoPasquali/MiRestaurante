@@ -15,4 +15,10 @@ interface ProductDao {
 
     @Query("select * from product_table")
     fun getProducts(): MutableList<Product>
+
+    @Query("select * from product_table where category = 'PLATO'")
+    fun getPlatos(): MutableList<Product>
+
+    @Query("select * from product_table where category = 'BEBIDA'")
+    fun getBebidas(): MutableList<Product>
 }

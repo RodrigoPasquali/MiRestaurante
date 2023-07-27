@@ -1,4 +1,4 @@
-
+package com.example.mirestaurante.ui.product
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup

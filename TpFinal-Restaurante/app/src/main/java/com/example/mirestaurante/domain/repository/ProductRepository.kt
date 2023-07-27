@@ -6,4 +6,6 @@ interface ProductRepository {
     suspend fun insert(product: Product)
     suspend fun saveProductsList(products: MutableList<Product>)
     suspend fun getProducts(): MutableList<Product>
+    suspend fun getPlatos(): MutableList<Product>
+    suspend fun getBebidas(): MutableList<Product>
 }

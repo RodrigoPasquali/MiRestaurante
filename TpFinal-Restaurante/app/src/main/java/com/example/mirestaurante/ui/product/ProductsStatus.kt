@@ -1,4 +1,4 @@
-package com.example.mirestaurante.ui.bebidas
+package com.example.mirestaurante.ui.product
 
 import com.example.mirestaurante.domain.Product
 

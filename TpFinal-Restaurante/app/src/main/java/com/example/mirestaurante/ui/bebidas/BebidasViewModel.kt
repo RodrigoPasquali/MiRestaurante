@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mirestaurante.domain.repository.ProductRepository
+import com.example.mirestaurante.ui.product.ProductsStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -38,7 +39,7 @@ class BebidasViewModel(
     private suspend fun onReadyProducts() {
         _productStatus.postValue(
             ProductsStatus.ReadyProducts(
-                repository.getProducts()
+                repository.getBebidas()
             )
         )
     }
