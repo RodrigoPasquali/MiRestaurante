@@ -2,23 +2,17 @@ package com.example.mirestaurante.infraestructure.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.mirestaurante.domain.model.Product
+import com.example.mirestaurante.ui.product.ProductCategory
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductDao {
-    @Insert
-    fun insert(product: Product)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun saveProducts(products: List<Product>)
 
-    @Insert
-    fun saveProductsList(products: MutableList<Product>)
-
-    @Query("select * from product_table")
-    fun getProducts(): MutableList<Product>
-
-    @Query("select * from product_table where category = 'PLATO'")
-    fun getPlatos(): MutableList<Product>
-
-    @Query("select * from product_table where category = 'BEBIDA'")
-    fun getBebidas(): MutableList<Product>
+    @Query("select * from product_table where category = :category")
+    fun getProducts(category: ProductCategory): Flow<List<Product>>
 }

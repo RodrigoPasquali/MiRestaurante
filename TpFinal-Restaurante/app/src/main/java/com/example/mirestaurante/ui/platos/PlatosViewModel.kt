@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mirestaurante.domain.repository.ProductRepository
+import com.example.mirestaurante.ui.product.ProductCategory
 import com.example.mirestaurante.ui.product.ProductsStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,6 +20,8 @@ class PlatosViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             loading()
             Thread.sleep(3000)
+
+            searchProducts()
 
             when ((1..10).random()) {
                 in READY_PRODUCTS -> {
@@ -36,12 +39,18 @@ class PlatosViewModel(
         }
     }
 
+    private fun searchProducts() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.searchProducts(ProductCategory.PLATO)
+        }
+    }
+
     private suspend fun onReadyProducts() {
-        _productStatus.postValue(
-            ProductsStatus.ReadyProducts(
-                repository.getPlatos()
+        repository.getProducts(ProductCategory.PLATO).collect {
+            _productStatus.postValue(
+                ProductsStatus.ReadyProducts(it)
             )
-        )
+        }
     }
 
     private fun onConnectionError() {

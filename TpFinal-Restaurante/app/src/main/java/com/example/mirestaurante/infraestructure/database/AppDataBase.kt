@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.mirestaurante.ui.bebidas.BebidasListDummy
 import com.example.mirestaurante.infraestructure.database.dao.ProductDao
 import com.example.mirestaurante.infraestructure.database.dao.UserDao
 import com.example.mirestaurante.domain.model.Product
@@ -15,7 +14,7 @@ import java.util.concurrent.Executors
 
 @Database(
     entities = [User::class, Product::class],
-    version = 3,
+    version = 4,
 //    autoMigrations = [AutoMigration(from = 1, to = 2)], //cuando quiera migrar y no perder la info
     exportSchema = true
 )
@@ -34,8 +33,7 @@ abstract class AppDataBase : RoomDatabase() {
                             super.onCreate(db)
 
                             Executors.newSingleThreadExecutor().execute() {
-                                instance?.getProductDao()?.saveProductsList(BebidasListDummy.getBebidas())
-                                instance?.getProductDao()?.saveProductsList(PlatosListDummy.getPlatos())
+                                instance?.getProductDao()?.saveProducts(PlatosListDummy.getPlatos())
                             }
                         }
                     })

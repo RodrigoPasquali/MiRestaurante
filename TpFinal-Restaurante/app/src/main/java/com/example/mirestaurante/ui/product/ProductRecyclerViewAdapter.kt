@@ -26,7 +26,7 @@ class ProductRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        val product = products[position]
+        val product = products.get(position)
         holder.itemName.text = product.name
         holder.itemDescription.text = product.description
 
@@ -40,13 +40,13 @@ class ProductRecyclerViewAdapter(
         }
     }
 
-    fun updateProducts(productsReceiver: MutableList<Product>) {
+    fun updateProducts(productsReceiver: List<Product>) {
         products = productsReceiver
         notifyDataSetChanged()
     }
 
     private fun getProductImage(product: Product): Int {
-        return product.image ?: R.drawable.no_photo
+        return R.drawable.no_photo
     }
 
     override fun getItemCount(): Int = products.size

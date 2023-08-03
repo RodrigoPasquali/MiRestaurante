@@ -82,7 +82,7 @@ class PlatosFragment : Fragment() {
         binding.errorContainer.visibility = View.GONE
     }
 
-    private fun onReadyProducts(products: MutableList<Product>) {
+    private fun onReadyProducts(products: List<Product>) {
         binding.list.visibility = View.VISIBLE
         adapter.updateProducts(products)
         binding.loadingBar.visibility = View.GONE

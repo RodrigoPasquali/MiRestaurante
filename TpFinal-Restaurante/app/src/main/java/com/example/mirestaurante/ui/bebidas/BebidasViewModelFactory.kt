@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.mirestaurante.domain.repository.ProductRepository
 
 class BebidasViewModelFactory(
-    private val repository: ProductRepository
+    private val productRepository: ProductRepository
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return BebidasViewModel(repository) as T
+        return BebidasViewModel(productRepository) as T
     }
 }
