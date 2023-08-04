@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mirestaurante.domain.repository.ProductRepository
+import com.example.mirestaurante.infraestructure.remote.ProductResult
 import com.example.mirestaurante.ui.product.ProductCategory
 import com.example.mirestaurante.ui.product.ProductsStatus
 import kotlinx.coroutines.Dispatchers
@@ -26,18 +27,29 @@ class BebidasViewModel(
         }
     }
 
-    private fun searchProducts() {
+    private suspend fun searchProducts() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                repository.searchProducts(ProductCategory.BEBIDA)
+                val response = repository.searchProducts(ProductCategory.BEBIDA)
+                if (response?.isSuccessful == true) {
+                    saveProducts(response.body())
+                } else {
+                    onError()
+                }
             } catch (e: Exception) {
                 onError()
             }
         }
     }
 
-    private fun onError() {
-        _productStatus.postValue(ProductsStatus.Error("Hubo problemas con la coneccion, intento de nuevo"))
+    private suspend fun saveProducts(products: List<ProductResult>?) {
+        products?.let {
+            repository.saveProducts(
+                it.map { productResult ->
+                    productResult.mapToProduct()
+                }
+            )
+        }
     }
 
     private suspend fun onReadyProducts() {
@@ -46,6 +58,10 @@ class BebidasViewModel(
                 ProductsStatus.ReadyProducts(it)
             )
         }
+    }
+
+    private fun onError() {
+        _productStatus.postValue(ProductsStatus.Error("Hubo problemas con la conexion, intente de nuevo"))
     }
 
     private fun loading() {
