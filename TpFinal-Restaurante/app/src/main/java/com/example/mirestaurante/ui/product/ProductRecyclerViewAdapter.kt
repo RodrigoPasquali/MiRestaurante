@@ -4,11 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.mirestaurante.R
 import com.example.mirestaurante.databinding.ItemProductBinding
-
 import com.example.mirestaurante.domain.model.Product
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 
 class ProductRecyclerViewAdapter(
     private var products: List<Product> = listOf(),
@@ -33,7 +31,7 @@ class ProductRecyclerViewAdapter(
         val price = product.price
         holder.itemPrice.text = "$ $price"
 
-        Picasso.get().load(getProductImage(product)).into(holder.itemImage)
+        setProductImage(product, holder)
 
         holder.itemView.setOnClickListener {
             itemCallback(product)
@@ -45,8 +43,10 @@ class ProductRecyclerViewAdapter(
         notifyDataSetChanged()
     }
 
-    private fun getProductImage(product: Product): Int {
-        return R.drawable.no_photo
+    private fun setProductImage(product: Product, holder: ProductViewHolder) {
+        Glide.with(holder.itemView)
+            .load(product.image)
+            .into(holder.itemImage)
     }
 
     override fun getItemCount(): Int = products.size
