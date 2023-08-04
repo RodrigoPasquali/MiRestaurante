@@ -28,8 +28,16 @@ class BebidasViewModel(
 
     private fun searchProducts() {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.searchProducts(ProductCategory.BEBIDA)
+            try {
+                repository.searchProducts(ProductCategory.BEBIDA)
+            } catch (e: Exception) {
+                onError()
+            }
         }
+    }
+
+    private fun onError() {
+        _productStatus.postValue(ProductsStatus.Error("Hubo problemas con la coneccion, intento de nuevo"))
     }
 
     private suspend fun onReadyProducts() {

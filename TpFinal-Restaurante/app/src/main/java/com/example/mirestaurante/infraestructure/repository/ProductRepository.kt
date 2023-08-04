@@ -20,33 +20,29 @@ class ProductRepository(
     }
 
     override suspend fun searchProducts(category: ProductCategory) {
-        try {
-            val response = when (category) {
-                ProductCategory.BEBIDA -> {
-                    service.getBebidas()
-                }
-
-                ProductCategory.PLATO -> {
-                    service.getPlatos()
-                }
-
-                else -> {null}
+        val response = when (category) {
+            ProductCategory.BEBIDA -> {
+                service.getBebidas()
             }
 
-            if (response?.isSuccessful == true) {
-                val products = response.body()
-                products?.let {
-                    appDataBase.getProductDao().saveProducts(
-                        it.map { productResult ->
-                            productResult.mapToProduct()
-                        }
-                    )
-                }
-            } else {
-                // Manejar el caso de error en la respuesta de la API
+            ProductCategory.PLATO -> {
+                service.getPlatos()
             }
-        } catch (e: Exception) {
-            // Manejar el caso de error de la red
+
+            else -> {
+                null
+            }
+        }
+
+        if (response?.isSuccessful == true) {
+            val products = response.body()
+            products?.let {
+                appDataBase.getProductDao().saveProducts(
+                    it.map { productResult ->
+                        productResult.mapToProduct()
+                    }
+                )
+            }
         }
     }
 }
