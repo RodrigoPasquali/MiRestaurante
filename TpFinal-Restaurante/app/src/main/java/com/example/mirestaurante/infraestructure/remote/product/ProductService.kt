@@ -1,4 +1,4 @@
-package com.example.mirestaurante.infraestructure.remote
+package com.example.mirestaurante.infraestructure.remote.product
 
 import retrofit2.Response
 import retrofit2.http.GET

@@ -1,4 +1,4 @@
-package com.example.mirestaurante.infraestructure.remote
+package com.example.mirestaurante.infraestructure.remote.product
 
 import com.example.mirestaurante.domain.model.Product
 import com.example.mirestaurante.ui.product.ProductCategory

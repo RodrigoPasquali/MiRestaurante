@@ -5,7 +5,7 @@ import com.example.mirestaurante.domain.repository.UserRepository
 import com.example.mirestaurante.infraestructure.EncryptedSharedPreferencesManager
 import com.example.mirestaurante.infraestructure.database.AppDataBase
 import com.example.mirestaurante.infraestructure.remote.ProductAPI
-import com.example.mirestaurante.infraestructure.remote.ProductService
+import com.example.mirestaurante.infraestructure.remote.product.ProductService
 import com.example.mirestaurante.infraestructure.repository.UserRepositoryRoom
 
 object Injection {

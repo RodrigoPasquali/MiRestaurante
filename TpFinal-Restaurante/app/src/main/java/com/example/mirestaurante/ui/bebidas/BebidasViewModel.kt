@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mirestaurante.domain.repository.ProductRepository
-import com.example.mirestaurante.infraestructure.remote.ProductResult
+import com.example.mirestaurante.infraestructure.remote.product.ProductResult
 import com.example.mirestaurante.ui.product.ProductCategory
 import com.example.mirestaurante.ui.product.ProductsStatus
 import kotlinx.coroutines.Dispatchers

@@ -3,8 +3,8 @@ package com.example.mirestaurante.infraestructure.repository
 import com.example.mirestaurante.domain.model.Product
 import com.example.mirestaurante.domain.repository.ProductRepository
 import com.example.mirestaurante.infraestructure.database.AppDataBase
-import com.example.mirestaurante.infraestructure.remote.ProductResult
-import com.example.mirestaurante.infraestructure.remote.ProductService
+import com.example.mirestaurante.infraestructure.remote.product.ProductResult
+import com.example.mirestaurante.infraestructure.remote.product.ProductService
 import com.example.mirestaurante.ui.product.ProductCategory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

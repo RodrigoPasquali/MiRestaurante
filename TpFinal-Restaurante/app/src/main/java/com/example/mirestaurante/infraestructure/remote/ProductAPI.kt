@@ -1,5 +1,6 @@
 package com.example.mirestaurante.infraestructure.remote
 
+import com.example.mirestaurante.infraestructure.remote.product.ProductService
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
