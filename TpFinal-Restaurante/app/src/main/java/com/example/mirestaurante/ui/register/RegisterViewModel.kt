@@ -23,13 +23,21 @@ class RegisterViewModel(
                 val response = userRepository.register(user)
 
                 if (response?.isSuccessful == true) {
-                    _registerStatus.postValue(RegisterStatus.SuccessfulRegistration)
+                    onSuccessfulRegistration()
                 } else {
-                    _registerStatus.postValue(RegisterStatus.FailedRegistration(response?.message()))
+                    onFailureRegistration(response?.message())
                 }
             } catch (e: Exception) {
-                _registerStatus.postValue(RegisterStatus.FailedRegistration(e.message))
+                onFailureRegistration(e.message)
             }
         }
+    }
+
+    private fun onFailureRegistration(message: String?) {
+        _registerStatus.postValue(RegisterStatus.FailedRegistration(message))
+    }
+
+    private fun onSuccessfulRegistration() {
+        _registerStatus.postValue(RegisterStatus.SuccessfulRegistration)
     }
 }
