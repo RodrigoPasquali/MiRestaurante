@@ -1,33 +1,25 @@
 package com.example.mirestaurante.infraestructure.repository
 
-import com.example.mirestaurante.infraestructure.database.AppDataBase
 import com.example.mirestaurante.domain.model.User
 import com.example.mirestaurante.domain.repository.UserRepository
 import com.example.mirestaurante.infraestructure.remote.user.UserResponse
+import com.example.mirestaurante.infraestructure.remote.user.UserService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-class UserRepositoryRoom(database: AppDataBase) : UserRepository {
-    private val userDao = database.getUserDao()
-
+class UserRepositoryRemote(private val service: UserService) : UserRepository {
     override suspend fun register(user: User): Response<UserResponse>? {
-        withContext(Dispatchers.IO) {
-            userDao.create(user)
+        return withContext(Dispatchers.IO) {
+            service.register(user)
         }
-
-        return null
     }
 
     override suspend fun checkIfIsInDB(email: String): Int {
-        return withContext(Dispatchers.IO) {
-            userDao.checkIfUserIsInDB(email)
-        }
+        TODO("Not yet implemented")
     }
 
     override suspend fun authenticate(email: String, password: String): Int {
-        return withContext(Dispatchers.IO) {
-            userDao.authenticate(email, password)
-        }
+        TODO("Not yet implemented")
     }
 }

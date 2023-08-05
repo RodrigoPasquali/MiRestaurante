@@ -24,7 +24,7 @@ class RegisterActivity : AppCompatActivity() {
         registerViewModel =
             ViewModelProvider(
                 this,
-                RegisterViewModelFactory(Injection.provideUserRepository(applicationContext))
+                RegisterViewModelFactory(Injection.provideRemoteUserRepository())
             ).get(RegisterViewModel::class.java)
 
         observers()
@@ -43,13 +43,13 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun updateRegistrationStatus(status: RegisterStatus) {
         when (status) {
-            RegisterStatus.SuccessfulRegistration -> {
+            is RegisterStatus.SuccessfulRegistration -> {
                 onSuccessfulRegistration()
             }
-            RegisterStatus.FailedRegistration -> {
-                onUserExists()
+            is RegisterStatus.FailedRegistration -> {
+                onUserExists(status.message)
             }
-            RegisterStatus.Loading -> {
+            is RegisterStatus.Loading -> {
                 loading()
             }
         }
@@ -59,12 +59,12 @@ class RegisterActivity : AppCompatActivity() {
         if (!areThereEmptyFields()) {
             registerViewModel.tryRegisterUser(
                 User(
+                    binding.email.text.toString(),
+                    binding.password.text.toString(),
                     binding.name.text.toString(),
                     binding.lastname.text.toString(),
                     binding.streetName.text.toString(),
                     binding.streetNumber.text.toString().toInt(),
-                    binding.email.text.toString(),
-                    binding.password.text.toString()
                 )
             )
         } else {
@@ -82,8 +82,8 @@ class RegisterActivity : AppCompatActivity() {
         showSuccessfulUserRegistrationDialog()
     }
 
-    private fun onUserExists() {
-        showUserExistsMessage()
+    private fun onUserExists(message: String?) {
+        showUserExistsMessage(message)
         enableRegistrationButton()
         progressDialog.dismiss()
     }
@@ -106,10 +106,11 @@ class RegisterActivity : AppCompatActivity() {
         ).show()
     }
 
-    private fun showUserExistsMessage() {
+    private fun showUserExistsMessage(message: String?) {
         Toast.makeText(
             applicationContext,
-            "El mail ya se encuentra registrado en la aplicacion",
+//            "El mail ya se encuentra registrado en la aplicacion",
+            message,
             Toast.LENGTH_SHORT
         ).show()
     }

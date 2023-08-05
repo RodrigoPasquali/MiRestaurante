@@ -1,13 +1,14 @@
 package com.example.mirestaurante.infraestructure.remote
 
 import com.example.mirestaurante.infraestructure.remote.product.ProductService
+import com.example.mirestaurante.infraestructure.remote.user.UserService
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object ProductAPI {
+object RetrofitClient {
     private const val BASE_URL = "https://pallyscience.backendless.app/"
     private val gson = GsonBuilder().setLenient().create()
 
@@ -18,6 +19,7 @@ object ProductAPI {
         .build()
 
     val productApiService: ProductService = retrofit.create(ProductService::class.java)
+    val userApiService: UserService = retrofit.create(UserService::class.java)
 
     private fun providerOkHttpClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()

@@ -28,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
             ViewModelProvider(
                 this,
                 LoginViewModelFactory(
-                    Injection.provideUserRepository(applicationContext),
+                    Injection.provideLocalUserRepository(applicationContext),
                     Injection.provideEncryptedSharedPreferencesManager()
                 )
             ).get(LoginViewModel::class.java)

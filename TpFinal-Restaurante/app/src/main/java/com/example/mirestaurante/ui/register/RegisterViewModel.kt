@@ -18,30 +18,17 @@ class RegisterViewModel(
     fun tryRegisterUser(user: User) {
         _registerStatus.postValue(RegisterStatus.Loading)
         viewModelScope.launch(Dispatchers.IO) {
-            Thread.sleep(3000)
-            if (!checkIfExistsUser(user.email)) {
-                registerUser(user)
-            } else {
-                onUserExist()
+            try {
+                val a = userRepository.register(user)
+
+                if (a?.isSuccessful == true) {
+                    _registerStatus.postValue(RegisterStatus.SuccessfulRegistration)
+                } else {
+                    _registerStatus.postValue(RegisterStatus.FailedRegistration(a?.message()))
+                }
+            } catch (e: Exception) {
+                _registerStatus.postValue(RegisterStatus.FailedRegistration(e.message))
             }
         }
-    }
-
-    private suspend fun checkIfExistsUser(email: String): Boolean {
-        return userRepository.checkIfIsInDB(email) == USER_EXISTS
-    }
-
-    private suspend fun registerUser(user: User) {
-        userRepository.create(user)
-
-        _registerStatus.postValue(RegisterStatus.SuccessfulRegistration)
-    }
-
-    private fun onUserExist() {
-        _registerStatus.postValue(RegisterStatus.FailedRegistration)
-    }
-
-    private companion object {
-        const val USER_EXISTS = 1
     }
 }
