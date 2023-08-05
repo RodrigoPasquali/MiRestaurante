@@ -28,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
             ViewModelProvider(
                 this,
                 LoginViewModelFactory(
-                    Injection.provideLocalUserRepository(applicationContext),
+                    Injection.provideRemoteUserRepository(),
                     Injection.provideEncryptedSharedPreferencesManager()
                 )
             ).get(LoginViewModel::class.java)
@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun observeLoginUser() {
         loginViewModel.loginUser.observe(this) { loginUser ->
-            binding.email.setText(loginUser.email)
+            binding.email.setText(loginUser.login)
             binding.password.setText(loginUser.password)
             binding.rememberUserCheckbox.isChecked = loginUser.remember
         }
@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateLoginStatus(loginStatus: LoginStatus) {
         when (loginStatus) {
-            LoginStatus.AuthenticatingCredentials -> {
+            LoginStatus.Loading -> {
                 onAuthenticatingCredentials()
             }
 

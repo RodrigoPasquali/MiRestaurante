@@ -1,7 +1,7 @@
 package com.example.mirestaurante.domain.model
 
 data class LoginUser(
-    val email: String,
+    val login: String,
     val password: String,
-    val remember: Boolean
+    val remember: Boolean = false
 )

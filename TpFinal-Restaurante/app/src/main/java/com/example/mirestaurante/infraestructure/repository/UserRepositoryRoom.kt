@@ -1,5 +1,6 @@
 package com.example.mirestaurante.infraestructure.repository
 
+import com.example.mirestaurante.domain.model.LoginUser
 import com.example.mirestaurante.infraestructure.database.AppDataBase
 import com.example.mirestaurante.domain.model.User
 import com.example.mirestaurante.domain.repository.UserRepository
@@ -19,15 +20,17 @@ class UserRepositoryRoom(database: AppDataBase) : UserRepository {
         return null
     }
 
-    override suspend fun checkIfIsInDB(email: String): Int {
-        return withContext(Dispatchers.IO) {
-            userDao.checkIfUserIsInDB(email)
+    override suspend fun login(loginUser: LoginUser): Response<UserResponse>? {
+        withContext(Dispatchers.IO) {
+            userDao.authenticate(loginUser.login, loginUser.password)
         }
+
+        return null
     }
 
-    override suspend fun authenticate(email: String, password: String): Int {
+    suspend fun checkIfIsInDB(email: String): Int {
         return withContext(Dispatchers.IO) {
-            userDao.authenticate(email, password)
+            userDao.checkIfUserIsInDB(email)
         }
     }
 }

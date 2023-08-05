@@ -11,7 +11,7 @@ class EncryptedSharedPreferencesManager {
         val editorSharedPreferences = getSharedPreferencesLogin(context).edit()
 
         editorSharedPreferences.apply {
-            putString(EMAIL_KEY, loginUser.email)
+            putString(EMAIL_KEY, loginUser.login)
             putString(PASSWORD_KEY, loginUser.password)
             putBoolean(REMEMBER_KEY, loginUser.remember)
         }.apply()

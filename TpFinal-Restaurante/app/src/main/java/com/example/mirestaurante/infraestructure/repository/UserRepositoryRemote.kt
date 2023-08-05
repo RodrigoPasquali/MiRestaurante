@@ -1,5 +1,6 @@
 package com.example.mirestaurante.infraestructure.repository
 
+import com.example.mirestaurante.domain.model.LoginUser
 import com.example.mirestaurante.domain.model.User
 import com.example.mirestaurante.domain.repository.UserRepository
 import com.example.mirestaurante.infraestructure.remote.user.UserResponse
@@ -15,11 +16,9 @@ class UserRepositoryRemote(private val service: UserService) : UserRepository {
         }
     }
 
-    override suspend fun checkIfIsInDB(email: String): Int {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun authenticate(email: String, password: String): Int {
-        TODO("Not yet implemented")
+    override suspend fun login(loginUser: LoginUser): Response<UserResponse>? {
+        return withContext(Dispatchers.IO) {
+            service.login(loginUser)
+        }
     }
 }

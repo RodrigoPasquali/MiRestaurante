@@ -8,8 +8,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.mirestaurante.infraestructure.EncryptedSharedPreferencesManager
 import com.example.mirestaurante.domain.model.LoginUser
 import com.example.mirestaurante.domain.repository.UserRepository
+import com.example.mirestaurante.infraestructure.remote.user.UserResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class LoginViewModel(
     private val repository: UserRepository,
@@ -26,20 +28,29 @@ class LoginViewModel(
     }
 
     fun onTryToLogin(loginUser: LoginUser, context: Context) {
-        _loginStatus.postValue(LoginStatus.AuthenticatingCredentials)
+        _loginStatus.postValue(LoginStatus.Loading)
 
         viewModelScope.launch(Dispatchers.IO) {
-            Thread.sleep(3000)
-            if (authenticateUser(loginUser)) {
-                onSuccessfulLogin(loginUser, context)
-            } else {
+            try {
+                val response = login(
+                    LoginUser(
+                        loginUser.login,
+                        loginUser.password
+                    )
+                )
+                if (response?.isSuccessful == true) {
+                    onSuccessfulLogin(loginUser, context)
+                } else {
+                    onFailureLogin()
+                }
+            } catch (e: Exception) {
                 onFailureLogin()
             }
         }
     }
 
-    private suspend fun authenticateUser(loginUser: LoginUser): Boolean {
-        return repository.authenticate(loginUser.email, loginUser.password) == USER_EXISTS
+    private suspend fun login(loginUser: LoginUser): Response<UserResponse>? {
+        return repository.login(loginUser)
     }
 
     private fun onSuccessfulLogin(loginUser: LoginUser, context: Context) {
@@ -65,9 +76,5 @@ class LoginViewModel(
 
     private fun clearUserLogin(context: Context) {
         sharedPreferences.clearUserLogin(context)
-    }
-
-    private companion object {
-        const val USER_EXISTS = 1
     }
 }
