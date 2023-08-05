@@ -17,14 +17,15 @@ class RegisterViewModel(
 
     fun tryRegisterUser(user: User) {
         _registerStatus.postValue(RegisterStatus.Loading)
+
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val a = userRepository.register(user)
+                val response = userRepository.register(user)
 
-                if (a?.isSuccessful == true) {
+                if (response?.isSuccessful == true) {
                     _registerStatus.postValue(RegisterStatus.SuccessfulRegistration)
                 } else {
-                    _registerStatus.postValue(RegisterStatus.FailedRegistration(a?.message()))
+                    _registerStatus.postValue(RegisterStatus.FailedRegistration(response?.message()))
                 }
             } catch (e: Exception) {
                 _registerStatus.postValue(RegisterStatus.FailedRegistration(e.message))
