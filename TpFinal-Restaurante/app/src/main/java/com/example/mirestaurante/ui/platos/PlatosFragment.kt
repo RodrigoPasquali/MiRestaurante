@@ -30,7 +30,8 @@ class PlatosFragment : Fragment() {
             ViewModelProvider(
                 this,
                 PlatosViewModelFactory(
-                    Injection.provideProductRepository(requireActivity().applicationContext)
+                    Injection.provideProductRepository(requireActivity().applicationContext),
+                    Injection.provideGetProducts(requireActivity().applicationContext)
                 )
             ).get(PlatosViewModel::class.java)
 

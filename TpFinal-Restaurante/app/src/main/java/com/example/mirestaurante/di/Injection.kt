@@ -1,6 +1,7 @@
 package com.example.mirestaurante.di
 
 import android.content.Context
+import com.example.mirestaurante.domain.action.GetProducts
 import com.example.mirestaurante.domain.repository.UserRepository
 import com.example.mirestaurante.infraestructure.EncryptedSharedPreferencesManager
 import com.example.mirestaurante.infraestructure.database.AppDataBase
@@ -26,6 +27,9 @@ object Injection {
     fun provideProductRepository(context: Context): com.example.mirestaurante.domain.repository.ProductRepository {
         return com.example.mirestaurante.infraestructure.repository.ProductRepository(provideProductApiService(),provideAppDataBase(context))
     }
+
+    fun provideGetProducts(context: Context) = GetProducts(provideProductRepository(context))
+
 
     private fun provideProductApiService(): ProductService {
         return RetrofitClient.productApiService

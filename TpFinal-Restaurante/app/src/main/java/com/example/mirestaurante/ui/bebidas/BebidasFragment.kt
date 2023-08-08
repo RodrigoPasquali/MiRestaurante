@@ -30,7 +30,8 @@ class BebidasFragment : Fragment() {
             ViewModelProvider(
                 this,
                 BebidasViewModelFactory(
-                    Injection.provideProductRepository(requireActivity().applicationContext)
+                    Injection.provideProductRepository(requireActivity().applicationContext),
+                    Injection.provideGetProducts(requireActivity().applicationContext)
                 )
             ).get(BebidasViewModel::class.java)
 
