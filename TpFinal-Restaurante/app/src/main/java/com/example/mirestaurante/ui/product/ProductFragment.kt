@@ -1,6 +1,5 @@
-package com.example.mirestaurante.ui.bebidas
+package com.example.mirestaurante.ui.product
 
-import com.example.mirestaurante.ui.product.ProductRecyclerViewAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,31 +8,31 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mirestaurante.databinding.FragmentBebidasBinding
+import com.example.mirestaurante.databinding.FragmentProductsBinding
 import com.example.mirestaurante.di.Injection
 import com.example.mirestaurante.domain.model.Product
-import com.example.mirestaurante.ui.product.ProductsStatus
+import com.example.mirestaurante.domain.model.ProductCategory
 
-class BebidasFragment : Fragment() {
-    private lateinit var binding: FragmentBebidasBinding
+class ProductFragment : Fragment() {
+    private lateinit var binding: FragmentProductsBinding
     private lateinit var adapter: ProductRecyclerViewAdapter
-    private lateinit var bebidasViewModel: BebidasViewModel
+    private lateinit var productsViewModel: ProductsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentBebidasBinding.inflate(inflater, container, false)
+        binding = FragmentProductsBinding.inflate(inflater, container, false)
 
-        bebidasViewModel =
+        productsViewModel =
             ViewModelProvider(
                 this,
-                BebidasViewModelFactory(
+                ProductsViewModelFactory(
                     Injection.provideProductRepository(requireActivity().applicationContext),
                     Injection.provideGetProducts(requireActivity().applicationContext)
                 )
-            ).get(BebidasViewModel::class.java)
+            ).get(ProductsViewModel::class.java)
 
         return binding.root
     }
@@ -41,12 +40,15 @@ class BebidasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observers()
-        bebidasViewModel.loadProducts()
+        if(arguments != null) {
+            val category: ProductCategory = requireArguments().getSerializable("product_category") as ProductCategory
+            productsViewModel.loadProducts(category)
+        }
         setupAdapter()
     }
 
     private fun observers() {
-        bebidasViewModel.productStatus.observe(viewLifecycleOwner) {
+        productsViewModel.productStatus.observe(viewLifecycleOwner) {
             updateStatus(it)
         }
     }

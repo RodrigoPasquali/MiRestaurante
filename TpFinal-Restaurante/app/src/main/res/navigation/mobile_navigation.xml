@@ -11,35 +11,20 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_menu" >
         <action
-            android:id="@+id/action_nav_menu_home_to_nav_platos"
+            android:id="@+id/action_nav_menu_home_to_products"
             app:popUpTo="@id/nav_menu_home"
-            app:destination="@id/nav_platos" />
-        <action
-            android:id="@+id/action_nav_menu_home_to_nav_bebidas"
-            app:popUpTo="@id/nav_menu_home"
-            app:destination="@id/nav_bebidas" />
+            app:destination="@id/nav_products" />
         <action
             android:id="@+id/action_nav_home_to_nav_map"
             app:destination="@id/nav_map" />
     </fragment>
 
     <fragment
-        android:id="@+id/nav_bebidas"
-        android:name="com.example.mirestaurante.ui.bebidas.BebidasFragment"
-        android:label="@string/menu_bebidas"
-        tools:layout="@layout/fragment_bebidas" >
+        android:id="@+id/nav_products"
+        android:name="com.example.mirestaurante.ui.product.ProductFragment"
+        android:label="@string/menu_bebidas">
         <action
-            android:id="@+id/action_nav_bebidas_to_nav_menu_home"
-            app:destination="@id/nav_menu_home" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_platos"
-        android:name="com.example.mirestaurante.ui.platos.PlatosFragment"
-        android:label="@string/menu_platos"
-        tools:layout="@layout/fragment_platos" >
-        <action
-            android:id="@+id/action_nav_platos_to_nav_menu_home"
+            android:id="@+id/action_nav_products_to_nav_menu_home"
             app:destination="@id/nav_menu_home" />
     </fragment>
 

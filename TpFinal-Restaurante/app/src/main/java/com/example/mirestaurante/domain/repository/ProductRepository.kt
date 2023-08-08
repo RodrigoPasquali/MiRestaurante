@@ -2,7 +2,7 @@ package com.example.mirestaurante.domain.repository
 
 import com.example.mirestaurante.domain.model.Product
 import com.example.mirestaurante.infraestructure.remote.product.ProductResult
-import com.example.mirestaurante.ui.product.ProductCategory
+import com.example.mirestaurante.domain.model.ProductCategory
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 

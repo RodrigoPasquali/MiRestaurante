@@ -1,7 +1,7 @@
 package com.example.mirestaurante.domain.action
 
 import com.example.mirestaurante.domain.repository.ProductRepository
-import com.example.mirestaurante.ui.product.ProductCategory
+import com.example.mirestaurante.domain.model.ProductCategory
 
 class GetProducts(private val repository: ProductRepository) {
     suspend operator fun invoke(

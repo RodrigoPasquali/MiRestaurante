@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.mirestaurante.R
 import com.example.mirestaurante.databinding.FragmentMenuBinding
+import com.example.mirestaurante.domain.model.ProductCategory
 
 class HomeMenuFragment : Fragment() {
     private lateinit var binding: FragmentMenuBinding
@@ -18,9 +19,6 @@ class HomeMenuFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
         binding = FragmentMenuBinding.inflate(inflater, container, false)
 
         onBebidasButtonClick()
@@ -31,14 +29,19 @@ class HomeMenuFragment : Fragment() {
 
     private fun onBebidasButtonClick() {
         binding.bebidas.setOnClickListener {
-//            changeFragment(BebidasFragment())
-            this.findNavController().navigate(R.id.action_nav_menu_home_to_nav_bebidas)
+            goToProductCategoryFragment(ProductCategory.BEBIDA)
         }
     }
 
     private fun onPlatosButtonClick() {
         binding.platos.setOnClickListener {
-            this.findNavController().navigate(R.id.action_nav_menu_home_to_nav_platos)
+            goToProductCategoryFragment(ProductCategory.PLATO)
         }
+    }
+
+    private fun goToProductCategoryFragment(category: ProductCategory) {
+        val bundle: Bundle = bundleOf("product_category" to category)
+
+        this.findNavController().navigate(R.id.nav_products, bundle)
     }
 }

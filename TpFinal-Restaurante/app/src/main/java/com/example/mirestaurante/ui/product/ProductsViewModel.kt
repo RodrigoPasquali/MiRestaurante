@@ -1,4 +1,4 @@
-package com.example.mirestaurante.ui.bebidas
+package com.example.mirestaurante.ui.product
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,32 +7,30 @@ import androidx.lifecycle.viewModelScope
 import com.example.mirestaurante.domain.action.GetProducts
 import com.example.mirestaurante.domain.repository.ProductRepository
 import com.example.mirestaurante.infraestructure.remote.product.ProductResult
-import com.example.mirestaurante.ui.product.ProductCategory
-import com.example.mirestaurante.ui.product.ProductsStatus
+import com.example.mirestaurante.domain.model.ProductCategory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class BebidasViewModel(
+class ProductsViewModel(
     private val repository: ProductRepository,
     private val getProducts: GetProducts
 ) : ViewModel() {
     private var _productStatus = MutableLiveData<ProductsStatus>()
     var productStatus: LiveData<ProductsStatus> = _productStatus
 
-    fun loadProducts() {
+    fun loadProducts(category: ProductCategory) {
         viewModelScope.launch(Dispatchers.IO) {
             loading()
-            Thread.sleep(1000)
 
-            searchProducts()
-            onReadyProducts()
+            searchProducts(category)
+            onReadyProducts(category)
         }
     }
 
-    private suspend fun searchProducts() {
+    private suspend fun searchProducts(category: ProductCategory) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = repository.searchProducts(ProductCategory.BEBIDA)
+                val response = repository.searchProducts(category)
                 if (response?.isSuccessful == true) {
                     saveProducts(response.body())
                 } else {
@@ -54,8 +52,8 @@ class BebidasViewModel(
         }
     }
 
-    private suspend fun onReadyProducts() {
-        getProducts(ProductCategory.BEBIDA).collect{
+    private suspend fun onReadyProducts(category: ProductCategory) {
+        getProducts(category).collect{
             _productStatus.postValue(
                 ProductsStatus.ReadyProducts(it)
             )

@@ -1,6 +1,8 @@
-package com.example.mirestaurante.ui.product
+package com.example.mirestaurante.domain.model
 
-enum class ProductCategory {
+import java.io.Serializable
+
+enum class ProductCategory: Serializable {
     BEBIDA, PLATO, GENERAL;
 
     companion object {

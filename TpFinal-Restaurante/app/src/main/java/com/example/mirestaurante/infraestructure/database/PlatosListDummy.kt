@@ -1,7 +1,7 @@
-package com.example.mirestaurante.ui.platos
+package com.example.mirestaurante.infraestructure.database
 
 import com.example.mirestaurante.domain.model.Product
-import com.example.mirestaurante.ui.product.ProductCategory
+import com.example.mirestaurante.domain.model.ProductCategory
 
 object PlatosListDummy {
     fun getPlatos(): MutableList<Product> {

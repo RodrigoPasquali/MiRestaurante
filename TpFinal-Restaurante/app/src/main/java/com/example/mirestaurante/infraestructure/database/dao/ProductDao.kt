@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.mirestaurante.domain.model.Product
-import com.example.mirestaurante.ui.product.ProductCategory
+import com.example.mirestaurante.domain.model.ProductCategory
 import kotlinx.coroutines.flow.Flow
 
 @Dao
