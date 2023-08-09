@@ -30,7 +30,8 @@ class ProductFragment : Fragment() {
                 this,
                 ProductsViewModelFactory(
                     Injection.provideProductRepository(requireActivity().applicationContext),
-                    Injection.provideGetProducts(requireActivity().applicationContext)
+                    Injection.provideGetProducts(requireActivity().applicationContext),
+                    Injection.provideSearchProducts(requireActivity().applicationContext),
                 )
             ).get(ProductsViewModel::class.java)
 
