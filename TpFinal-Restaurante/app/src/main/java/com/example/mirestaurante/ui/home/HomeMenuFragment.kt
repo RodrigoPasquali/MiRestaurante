@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.mirestaurante.R
 import com.example.mirestaurante.databinding.FragmentMenuBinding
-import com.example.mirestaurante.domain.model.ProductCategory
+import com.example.mirestaurante.domain.model.product.ProductCategory
 
 class HomeMenuFragment : Fragment() {
     private lateinit var binding: FragmentMenuBinding

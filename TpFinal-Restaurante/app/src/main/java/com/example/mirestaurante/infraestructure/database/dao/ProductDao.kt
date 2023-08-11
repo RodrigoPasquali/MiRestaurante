@@ -4,8 +4,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.mirestaurante.domain.model.Product
-import com.example.mirestaurante.domain.model.ProductCategory
+import com.example.mirestaurante.domain.model.product.Product
+import com.example.mirestaurante.domain.model.product.ProductCategory
 import kotlinx.coroutines.flow.Flow
 
 @Dao

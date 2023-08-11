@@ -8,7 +8,7 @@ import com.example.mirestaurante.domain.action.product.GetProducts
 import com.example.mirestaurante.domain.action.product.SaveProducts
 import com.example.mirestaurante.domain.action.product.SearchProducts
 import com.example.mirestaurante.infraestructure.remote.product.ProductResult
-import com.example.mirestaurante.domain.model.ProductCategory
+import com.example.mirestaurante.domain.model.product.ProductCategory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

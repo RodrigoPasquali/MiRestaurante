@@ -1,7 +1,7 @@
 package com.example.mirestaurante.infraestructure.remote.product
 
-import com.example.mirestaurante.domain.model.Product
-import com.example.mirestaurante.domain.model.ProductCategory
+import com.example.mirestaurante.domain.model.product.Product
+import com.example.mirestaurante.domain.model.product.ProductCategory
 
 data class ProductResult(
     var image: String? = null,

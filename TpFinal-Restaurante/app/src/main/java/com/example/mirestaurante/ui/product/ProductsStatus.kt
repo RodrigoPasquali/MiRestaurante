@@ -1,6 +1,6 @@
 package com.example.mirestaurante.ui.product
 
-import com.example.mirestaurante.domain.model.Product
+import com.example.mirestaurante.domain.model.product.Product
 
 sealed class ProductsStatus {
     class ReadyProducts(val products: List<Product>) : ProductsStatus()

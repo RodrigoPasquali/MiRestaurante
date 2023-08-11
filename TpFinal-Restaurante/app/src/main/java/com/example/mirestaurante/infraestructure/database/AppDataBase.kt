@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.mirestaurante.infraestructure.database.dao.ProductDao
 import com.example.mirestaurante.infraestructure.database.dao.UserDao
-import com.example.mirestaurante.domain.model.Product
+import com.example.mirestaurante.domain.model.product.Product
 import com.example.mirestaurante.domain.model.User
 import java.util.concurrent.Executors
 

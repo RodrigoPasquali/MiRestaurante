@@ -1,11 +1,11 @@
 package com.example.mirestaurante.infraestructure.repository
 
-import com.example.mirestaurante.domain.model.Product
+import com.example.mirestaurante.domain.model.product.Product
 import com.example.mirestaurante.domain.repository.ProductRepository
 import com.example.mirestaurante.infraestructure.database.AppDataBase
 import com.example.mirestaurante.infraestructure.remote.product.ProductResult
 import com.example.mirestaurante.infraestructure.remote.product.ProductService
-import com.example.mirestaurante.domain.model.ProductCategory
+import com.example.mirestaurante.domain.model.product.ProductCategory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext

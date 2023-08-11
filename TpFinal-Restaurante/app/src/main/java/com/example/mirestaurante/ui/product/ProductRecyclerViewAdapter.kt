@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.mirestaurante.databinding.ItemProductBinding
-import com.example.mirestaurante.domain.model.Product
+import com.example.mirestaurante.domain.model.product.Product
 import com.bumptech.glide.Glide
 
 class ProductRecyclerViewAdapter(

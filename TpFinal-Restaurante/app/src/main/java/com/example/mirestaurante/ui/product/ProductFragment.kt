@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mirestaurante.databinding.FragmentProductsBinding
 import com.example.mirestaurante.di.Injection
-import com.example.mirestaurante.domain.model.Product
-import com.example.mirestaurante.domain.model.ProductCategory
+import com.example.mirestaurante.domain.model.product.Product
+import com.example.mirestaurante.domain.model.product.ProductCategory
 
 class ProductFragment : Fragment() {
     private lateinit var binding: FragmentProductsBinding
