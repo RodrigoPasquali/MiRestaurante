@@ -5,17 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mirestaurante.domain.action.user.Login
 import com.example.mirestaurante.infraestructure.EncryptedSharedPreferencesManager
 import com.example.mirestaurante.domain.model.LoginUser
-import com.example.mirestaurante.domain.repository.UserRepository
 import com.example.mirestaurante.infraestructure.remote.user.UserResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class LoginViewModel(
-    private val repository: UserRepository,
-    private val sharedPreferences: EncryptedSharedPreferencesManager
+    private val sharedPreferences: EncryptedSharedPreferencesManager,
+    private val login: Login
 ) : ViewModel() {
     private var _loginUser = MutableLiveData<LoginUser>()
     var loginUser: LiveData<LoginUser> = _loginUser
@@ -32,7 +32,7 @@ class LoginViewModel(
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = login(
+                val response = onLogin(
                     LoginUser(
                         loginUser.login,
                         loginUser.password
@@ -49,8 +49,8 @@ class LoginViewModel(
         }
     }
 
-    private suspend fun login(loginUser: LoginUser): Response<UserResponse>? {
-        return repository.login(loginUser)
+    private suspend fun onLogin(loginUser: LoginUser): Response<UserResponse>? {
+        return login(loginUser)
     }
 
     private fun onSuccessfulLogin(loginUser: LoginUser, context: Context) {
