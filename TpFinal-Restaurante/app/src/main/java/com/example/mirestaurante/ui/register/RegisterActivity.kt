@@ -24,7 +24,7 @@ class RegisterActivity : AppCompatActivity() {
         registerViewModel =
             ViewModelProvider(
                 this,
-                RegisterViewModelFactory(Injection.provideRemoteUserRepository())
+                RegisterViewModelFactory(Injection.provideRegisterUser())
             ).get(RegisterViewModel::class.java)
 
         observers()

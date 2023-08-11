@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.mirestaurante.domain.action.product.GetProducts
 import com.example.mirestaurante.domain.action.product.SaveProducts
 import com.example.mirestaurante.domain.action.product.SearchProducts
+import com.example.mirestaurante.domain.action.user.RegisterUser
 import com.example.mirestaurante.domain.repository.UserRepository
 import com.example.mirestaurante.infraestructure.EncryptedSharedPreferencesManager
 import com.example.mirestaurante.infraestructure.database.AppDataBase
@@ -25,6 +26,8 @@ object Injection {
     fun provideRemoteUserRepository(): UserRepository {
         return UserRepositoryRemote(provideUserApiService())
     }
+
+    fun provideRegisterUser() = RegisterUser(provideRemoteUserRepository())
 
     fun provideProductRepository(context: Context): com.example.mirestaurante.domain.repository.ProductRepository {
         return com.example.mirestaurante.infraestructure.repository.ProductRepository(provideProductApiService(),provideAppDataBase(context))

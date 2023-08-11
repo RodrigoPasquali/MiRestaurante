@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mirestaurante.domain.action.user.RegisterUser
 import com.example.mirestaurante.domain.model.User
-import com.example.mirestaurante.domain.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(
-    private val userRepository: UserRepository
+    private val registerUser: RegisterUser
 ) : ViewModel() {
     private var _registerStatus = MutableLiveData<RegisterStatus>()
     var registerStatus: LiveData<RegisterStatus> = _registerStatus
@@ -20,7 +20,7 @@ class RegisterViewModel(
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = userRepository.register(user)
+                val response = registerUser(user)
 
                 if (response?.isSuccessful == true) {
                     onSuccessfulRegistration()
