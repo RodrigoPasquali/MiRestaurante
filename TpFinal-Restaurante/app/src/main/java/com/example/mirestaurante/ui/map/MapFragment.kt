@@ -1,4 +1,4 @@
-package com.example.mirestaurante.ui
+package com.example.mirestaurante.ui.map
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
