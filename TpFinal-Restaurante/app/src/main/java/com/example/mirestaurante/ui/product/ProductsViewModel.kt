@@ -5,17 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mirestaurante.domain.action.GetProducts
+import com.example.mirestaurante.domain.action.SaveProducts
 import com.example.mirestaurante.domain.action.SearchProducts
-import com.example.mirestaurante.domain.repository.ProductRepository
 import com.example.mirestaurante.infraestructure.remote.product.ProductResult
 import com.example.mirestaurante.domain.model.ProductCategory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ProductsViewModel(
-    private val repository: ProductRepository,
     private val getProducts: GetProducts,
-    private val searchProducts: SearchProducts
+    private val searchProducts: SearchProducts,
+    private val saveProducts: SaveProducts
 ) : ViewModel() {
     private var _productStatus = MutableLiveData<ProductsStatus>()
     var productStatus: LiveData<ProductsStatus> = _productStatus
@@ -46,7 +46,7 @@ class ProductsViewModel(
 
     private suspend fun saveProducts(products: List<ProductResult>?) {
         products?.let {
-            repository.saveProducts(
+            saveProducts(
                 it.map { productResult ->
                     productResult.mapToProduct()
                 }
@@ -55,7 +55,7 @@ class ProductsViewModel(
     }
 
     private suspend fun onReadyProducts(category: ProductCategory) {
-        getProducts(category).collect{
+        getProducts(category).collect {
             _productStatus.postValue(
                 ProductsStatus.ReadyProducts(it)
             )

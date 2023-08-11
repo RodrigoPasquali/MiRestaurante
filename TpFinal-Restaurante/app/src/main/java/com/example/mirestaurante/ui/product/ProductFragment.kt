@@ -29,9 +29,9 @@ class ProductFragment : Fragment() {
             ViewModelProvider(
                 this,
                 ProductsViewModelFactory(
-                    Injection.provideProductRepository(requireActivity().applicationContext),
                     Injection.provideGetProducts(requireActivity().applicationContext),
                     Injection.provideSearchProducts(requireActivity().applicationContext),
+                    Injection.provideSaveProducts(requireContext().applicationContext)
                 )
             ).get(ProductsViewModel::class.java)
 
