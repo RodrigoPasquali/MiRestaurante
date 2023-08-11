@@ -25,7 +25,6 @@ class ProductsViewModel(
             loading()
 
             onSearchProducts(category)
-            onReadyProducts(category)
         }
     }
 
@@ -35,6 +34,7 @@ class ProductsViewModel(
                 val response = searchProducts(category)
                 if (response?.isSuccessful == true) {
                     saveProducts(response.body())
+                    onReadyProducts(category)
                 } else {
                     onError()
                 }
