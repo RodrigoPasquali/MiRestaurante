@@ -1,7 +1,7 @@
 package com.example.mirestaurante.infraestructure.remote.user
 
-import com.example.mirestaurante.domain.model.LoginUser
-import com.example.mirestaurante.domain.model.User
+import com.example.mirestaurante.domain.model.user.LoginUser
+import com.example.mirestaurante.domain.model.user.User
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Headers

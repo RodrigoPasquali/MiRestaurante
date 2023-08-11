@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mirestaurante.domain.action.user.Login
 import com.example.mirestaurante.infraestructure.EncryptedSharedPreferencesManager
-import com.example.mirestaurante.domain.model.LoginUser
+import com.example.mirestaurante.domain.model.user.LoginUser
 import com.example.mirestaurante.infraestructure.remote.user.UserResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

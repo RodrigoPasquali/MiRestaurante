@@ -1,4 +1,4 @@
-package com.example.mirestaurante.domain.model
+package com.example.mirestaurante.domain.model.user
 
 data class LoginUser(
     val login: String,

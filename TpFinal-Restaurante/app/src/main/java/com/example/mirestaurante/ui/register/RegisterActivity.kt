@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.mirestaurante.R
 import com.example.mirestaurante.databinding.ActivityRegisterBinding
 import com.example.mirestaurante.di.Injection
-import com.example.mirestaurante.domain.model.User
+import com.example.mirestaurante.domain.model.user.User
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding

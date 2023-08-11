@@ -1,7 +1,7 @@
 package com.example.mirestaurante.infraestructure.repository
 
-import com.example.mirestaurante.domain.model.LoginUser
-import com.example.mirestaurante.domain.model.User
+import com.example.mirestaurante.domain.model.user.LoginUser
+import com.example.mirestaurante.domain.model.user.User
 import com.example.mirestaurante.domain.repository.UserRepository
 import com.example.mirestaurante.infraestructure.remote.user.UserResponse
 import com.example.mirestaurante.infraestructure.remote.user.UserService

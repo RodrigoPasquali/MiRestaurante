@@ -1,6 +1,6 @@
 package com.example.mirestaurante.domain.action.user
 
-import com.example.mirestaurante.domain.model.LoginUser
+import com.example.mirestaurante.domain.model.user.LoginUser
 import com.example.mirestaurante.domain.repository.UserRepository
 
 class Login(private val repository: UserRepository) {

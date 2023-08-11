@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mirestaurante.domain.action.user.RegisterUser
-import com.example.mirestaurante.domain.model.User
+import com.example.mirestaurante.domain.model.user.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
