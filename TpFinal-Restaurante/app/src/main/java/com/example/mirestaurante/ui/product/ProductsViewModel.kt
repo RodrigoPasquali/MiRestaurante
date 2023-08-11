@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mirestaurante.domain.action.GetProducts
-import com.example.mirestaurante.domain.action.SaveProducts
-import com.example.mirestaurante.domain.action.SearchProducts
+import com.example.mirestaurante.domain.action.product.GetProducts
+import com.example.mirestaurante.domain.action.product.SaveProducts
+import com.example.mirestaurante.domain.action.product.SearchProducts
 import com.example.mirestaurante.infraestructure.remote.product.ProductResult
 import com.example.mirestaurante.domain.model.ProductCategory
 import kotlinx.coroutines.Dispatchers

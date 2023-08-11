@@ -2,9 +2,9 @@ package com.example.mirestaurante.ui.product
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.mirestaurante.domain.action.GetProducts
-import com.example.mirestaurante.domain.action.SaveProducts
-import com.example.mirestaurante.domain.action.SearchProducts
+import com.example.mirestaurante.domain.action.product.GetProducts
+import com.example.mirestaurante.domain.action.product.SaveProducts
+import com.example.mirestaurante.domain.action.product.SearchProducts
 
 class ProductsViewModelFactory(
     private val getProducts: GetProducts,

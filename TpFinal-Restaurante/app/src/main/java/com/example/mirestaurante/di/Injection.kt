@@ -1,9 +1,9 @@
 package com.example.mirestaurante.di
 
 import android.content.Context
-import com.example.mirestaurante.domain.action.GetProducts
-import com.example.mirestaurante.domain.action.SaveProducts
-import com.example.mirestaurante.domain.action.SearchProducts
+import com.example.mirestaurante.domain.action.product.GetProducts
+import com.example.mirestaurante.domain.action.product.SaveProducts
+import com.example.mirestaurante.domain.action.product.SearchProducts
 import com.example.mirestaurante.domain.repository.UserRepository
 import com.example.mirestaurante.infraestructure.EncryptedSharedPreferencesManager
 import com.example.mirestaurante.infraestructure.database.AppDataBase

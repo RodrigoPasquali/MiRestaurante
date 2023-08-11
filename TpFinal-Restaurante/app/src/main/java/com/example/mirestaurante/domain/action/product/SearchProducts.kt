@@ -1,4 +1,4 @@
-package com.example.mirestaurante.domain.action
+package com.example.mirestaurante.domain.action.product
 
 import com.example.mirestaurante.domain.model.ProductCategory
 import com.example.mirestaurante.domain.repository.ProductRepository
