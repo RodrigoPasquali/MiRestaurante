@@ -22,7 +22,6 @@ class SaveProductsTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `save products successfully`() = runTest() {
-//        coEvery { repository.saveProducts(PRODUCT_LIST) } returns Unit //esto es lo mismo que usar mockk(relaxed = true)
         whenSaveProducts()
 
         thenSaveProductsSuccessfully()
