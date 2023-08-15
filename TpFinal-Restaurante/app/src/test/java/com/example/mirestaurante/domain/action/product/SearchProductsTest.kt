@@ -27,9 +27,19 @@ class SearchProductsTest {
     fun `search product list successful`() = runTest() {
         givenProducts()
 
-        whenSearchProducts()
+        whenSearchProducts(ProductCategory.PLATO)
 
         thenFoundProducts()
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `should return null on invalid product category`() = runTest() {
+        givenInvalidProductsCategory()
+
+        whenSearchProducts(ProductCategory.INVALID)
+
+        thenReturnNull()
     }
 
     private suspend fun givenProducts() {
@@ -37,12 +47,20 @@ class SearchProductsTest {
         coEvery { repository.searchProducts(ProductCategory.PLATO) } returns response
     }
 
-    private suspend fun whenSearchProducts() {
-        result = searchProducts(ProductCategory.PLATO)
+    private suspend fun givenInvalidProductsCategory() {
+        coEvery { repository.searchProducts(ProductCategory.INVALID) } returns null
+    }
+
+    private suspend fun whenSearchProducts(category: ProductCategory) {
+        result = searchProducts(category)
     }
 
     private fun thenFoundProducts() {
         assertEquals(PRODUCT_LIST_RESULT, result?.body())
+    }
+
+    private fun thenReturnNull() {
+        assertNull(result)
     }
 
     private companion object {
