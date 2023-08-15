@@ -45,15 +45,15 @@ class GetProductsTest {
 
         thenCallGetProductsRepository(ProductCategory.PLATO)
     }
-    
+
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun `should return empty list on general category`() = runTest() {
-        givenNoGeneralProductsCategory()
+    fun `should return empty list on invalid category`() = runTest() {
+        givenNoInvalidProductsCategory()
 
-        whenGetProducts(ProductCategory.GENERAL)
+        whenGetProducts(ProductCategory.INVALID)
 
-        thenCallGetProductsRepository(ProductCategory.GENERAL)
+        thenCallGetProductsRepository(ProductCategory.INVALID)
         thenReturnEmptyList()
     }
 
@@ -63,8 +63,8 @@ class GetProductsTest {
         }
     }
 
-    private suspend fun givenNoGeneralProductsCategory() {
-        coEvery { repository.getProducts(ProductCategory.GENERAL) } returns flow {
+    private suspend fun givenNoInvalidProductsCategory() {
+        coEvery { repository.getProducts(ProductCategory.INVALID) } returns flow {
             emit(emptyList())
         }
     }
