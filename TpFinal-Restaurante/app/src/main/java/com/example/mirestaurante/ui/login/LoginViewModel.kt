@@ -55,11 +55,11 @@ class LoginViewModel(
 
     private fun onSuccessfulLogin(loginUser: LoginUser, context: Context) {
         rememberUser(loginUser, context)
-        _loginStatus.postValue(LoginStatus.SuccessfulLogin)
+        _loginStatus.postValue(LoginStatus.Successful)
     }
 
     private fun onFailureLogin() {
-        _loginStatus.postValue(LoginStatus.FailedLogin)
+        _loginStatus.postValue(LoginStatus.Failed)
     }
 
     private fun rememberUser(loginUser: LoginUser, context: Context) {

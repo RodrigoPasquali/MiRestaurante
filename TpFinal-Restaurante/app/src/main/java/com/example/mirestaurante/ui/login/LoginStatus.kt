@@ -1,7 +1,7 @@
 package com.example.mirestaurante.ui.login
 
 sealed class LoginStatus {
-    object SuccessfulLogin: LoginStatus()
-    object FailedLogin: LoginStatus()
+    object Successful: LoginStatus()
+    object Failed: LoginStatus()
     object Loading: LoginStatus()
 }

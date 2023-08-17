@@ -68,11 +68,11 @@ class LoginActivity : AppCompatActivity() {
                 onAuthenticatingCredentials()
             }
 
-            LoginStatus.SuccessfulLogin -> {
+            LoginStatus.Successful -> {
                 onSuccessfulLogin()
             }
 
-            LoginStatus.FailedLogin -> {
+            LoginStatus.Failed -> {
                 onFailedLogin()
             }
         }
