@@ -7,6 +7,7 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -29,19 +30,38 @@ class LoginTest {
 
         whenLogin()
 
-        thenLoginSuccessfully()
+        thenLoginIsSuccessful()
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `should return a error response when user login fail`() = runTest() {
+        setupFailLogin()
+
+        whenLogin()
+
+        thenLoginFails()
     }
 
     private suspend fun setupLogin() {
         coEvery { repository.login(LOGIN_USER) } returns RESPONSE
     }
 
+    private suspend fun setupFailLogin() {
+        ERROR_RESPONSE
+        coEvery { repository.login(LOGIN_USER) } returns ERROR_RESPONSE
+    }
+
     private suspend fun whenLogin() {
         result = login(LOGIN_USER)
     }
 
-    private fun thenLoginSuccessfully() {
+    private fun thenLoginIsSuccessful() {
         assertEquals(RESPONSE, result)
+    }
+
+    private fun thenLoginFails() {
+        assertEquals(ERROR_RESPONSE, result)
     }
 
     private companion object {
@@ -53,10 +73,15 @@ class LoginTest {
 
         val RESPONSE: Response<UserResponse>? = Response.success(
             UserResponse(
-                1,
+                200,
                 "success",
                 emptyList()
             )
+        )
+
+        val ERROR_RESPONSE: Response<UserResponse>? = Response.error(
+            400,
+            "Error".toResponseBody()
         )
     }
 }
